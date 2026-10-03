@@ -77,7 +77,7 @@ img{max-width:100%;display:block}
 .links a{padding:.5rem .85rem;border-radius:10px;font-size:.9rem;font-weight:500;color:rgba(var(--text),.7)}
 .links a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .nav-right{margin-left:auto;display:flex;gap:.6rem;align-items:center}
-.nav-right .btn{display:none}.nav-right #authBtn{display:inline-flex}
+.nav-right .btn{display:none}.nav-right #authBtn{display:inline-flex}.nav-right #dashBtn:not([hidden]){display:inline-flex}@media(max-width:899px){#dashBtn .dtxt{display:none}#dashBtn{padding:0 .8rem}}
 .menu-btn{display:grid}
 @media(min-width:900px){.links{display:flex}.nav-right .btn{display:inline-flex}.menu-btn{display:none}}
 .drawer{position:fixed;inset:0;z-index:70;background:rgba(5,2,9,.7);backdrop-filter:blur(6px);display:none}
@@ -174,6 +174,47 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
 .socials{display:flex;gap:.5rem;margin-top:1rem}
 .copy{padding-block:1.4rem;border-top:1px solid rgba(var(--border),.08);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 
+@media(max-width:520px){.brand span{white-space:nowrap;font-size:.98rem}.brand{gap:.5rem}#authBtn span{display:none}#authBtn{padding:0 .8rem}.nav-in{gap:.5rem}}
+/* main ads slider */
+.ads{padding-top:1.25rem}
+.ad-wrap{position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(var(--accent),.3);min-height:560px;background:rgba(var(--card),.7);box-shadow:0 30px 80px -40px rgba(var(--accent),.6)}
+@media(min-width:860px){.ad-wrap{min-height:500px}}
+.slide{position:absolute;inset:0;display:grid;align-items:center;gap:2rem;padding:clamp(1.4rem,4vw,3.6rem) clamp(1.4rem,6vw,5rem) 4.4rem;opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .5s}
+@media(min-width:860px){.slide{grid-template-columns:1.25fr .75fr}}
+.ad-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .8rem;border-radius:8px;background:var(--grad-accent);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.slide h2{font-size:clamp(2.2rem,6.2vw,4.2rem);text-transform:uppercase;margin:.9rem 0 .3rem;line-height:1.02}
+.slide h3.acc{font-size:clamp(1.3rem,3.6vw,2.4rem);text-transform:uppercase}
+.slide p.sub{margin-top:.9rem;max-width:520px}
+.ad-price{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin-top:1.3rem}
+.ad-price s{color:rgba(255,255,255,.45);font-size:1.05rem}
+.ad-price b{padding:.35rem .9rem;border-radius:12px;background:var(--grad-accent);font-family:var(--font-display);font-size:1.9rem;box-shadow:0 10px 30px -10px rgba(var(--accent),.9)}
+.ad-save{padding:.3rem .6rem;border-radius:6px;background:#fff;color:rgb(120,40,200);font-size:.72rem;font-weight:800;text-transform:uppercase}
+.slide .cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+.ad-art{display:none;justify-self:center;width:min(100%,300px);aspect-ratio:4/5;position:relative}
+.slide.on .ad-art{animation:artIn .8s cubic-bezier(.2,.8,.2,1) both,floaty 6s ease-in-out .8s infinite}
+.ad-art::before{content:"";position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(var(--accent),.6),transparent 65%);filter:blur(30px);z-index:-1;animation:glow 3.5s ease-in-out infinite}
+.ad-card{position:absolute;inset:0;border-radius:24px;display:grid;place-items:center;text-align:center;padding:1.5rem;overflow:hidden;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out;box-shadow:0 30px 70px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.2) inset}
+.ad-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.32) 50%,transparent 62%);background-size:260% 100%;background-position:160% 0;animation:shine 4.5s ease-in-out 1s infinite}
+.ad-card i{display:inline-block;font-size:5.5rem;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));animation:bob 3s ease-in-out infinite}
+.ad-card span{display:block;margin-top:1rem;font-family:var(--font-display);font-weight:700;font-size:1.7rem;line-height:1.05;text-transform:uppercase}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(3deg)}50%{transform:translateY(-16px) rotate(-1.5deg)}}
+@keyframes artIn{from{opacity:0;translate:60px 0;scale:.88}to{opacity:1;translate:0 0;scale:1}}
+@keyframes glow{0%,100%{opacity:.55;scale:.95}50%{opacity:1;scale:1.08}}
+@keyframes shine{0%{background-position:160% 0}60%,100%{background-position:-60% 0}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+@media(min-width:860px){.ad-art{display:block}}
+.ad-arrow{position:absolute;z-index:3;bottom:.9rem;width:42px;height:42px;border-radius:99px;display:grid;place-items:center;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(6px)}
+.ad-arrow:hover{border-color:rgb(var(--accent));background:rgba(var(--accent),.3)}
+.ad-prev{right:4rem}.ad-next{right:1rem}
+@media(min-width:860px){.ad-arrow{bottom:auto;top:50%;transform:translateY(-50%);width:48px;height:48px}.ad-prev{left:1rem;right:auto}.ad-next{right:1rem}}
+.ad-dots{position:absolute;z-index:3;left:clamp(1.4rem,6vw,5rem);bottom:1.3rem;display:flex;gap:.5rem}
+.ad-dots button{width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.3);transition:.2s}
+.ad-dots button.on{width:28px;background:rgb(var(--accent))}
+.ad-bar{position:absolute;left:0;bottom:0;height:4px;width:100%;background:var(--grad-accent);transform-origin:left;animation:adbar 6s linear forwards;z-index:3}
+@keyframes adbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ad-wrap:hover .ad-bar,.ad-wrap:focus-within .ad-bar{animation-play-state:paused}
+
 /* product page */
 [hidden]{display:none!important}
 .pp{padding-block:2rem 4rem}
@@ -243,6 +284,25 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
 .sm-row .pr s{display:block;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.4)}
 @media(max-width:520px){.sm-row .pr{display:none}}
 
+/* dashboard */
+.dm{position:fixed;inset:0;z-index:86;display:none;background:rgba(5,2,9,.8);backdrop-filter:blur(8px);padding:calc(3vh + var(--safe-t)) 1rem calc(2vh + var(--safe-b))}
+.dm.open{display:block}
+.dm-card{max-width:860px;max-height:100%;margin:0 auto;display:flex;flex-direction:column;border-radius:24px;background:rgb(var(--card));border:1px solid rgba(var(--accent),.35);overflow:hidden;animation:slide .22s ease-out}
+.dm-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid rgba(var(--border),.1)}
+.dm-top h3{font-size:1.25rem}
+.dm-tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem 0;flex-wrap:wrap}
+.dm-tabs button{padding:.5rem 1rem;border-radius:99px;border:1px solid rgba(var(--border),.14);font-size:.86rem;font-weight:600}
+.dm-tabs button.on{background:var(--grad-accent);border-color:transparent}
+.dm-body{overflow:auto;padding:1.2rem;display:grid;gap:.7rem;align-content:start}
+.dm-bar{display:flex;gap:.6rem;flex-wrap:wrap}
+.dm-row{display:flex;align-items:center;gap:.8rem;padding:.6rem;border-radius:14px;background:rgba(255,255,255,.04)}
+.dm-row .th{width:52px;height:52px;border-radius:12px;flex:none}
+.dm-row .t{flex:1;min-width:0}.dm-row small{display:block;color:rgba(255,255,255,.55)}
+.dm select,.dm input[type=text],.dm-row input{height:38px;padding:0 .7rem;border-radius:10px;border:1px solid rgba(var(--border),.16);background:rgba(0,0,0,.25);color:#fff;font:inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+.af input[type=file]{height:auto;padding:.6rem}.af input[type=color]{padding:3px}
+
 /* auth */
 .am{position:fixed;inset:0;z-index:88;display:none;background:rgba(5,2,9,.78);backdrop-filter:blur(8px);padding:calc(4vh + var(--safe-t)) 1rem calc(2vh + var(--safe-b));overflow:auto}
 .am.open{display:block}
@@ -304,6 +364,7 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
       <a href="#games">Games</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
+      <button class="btn btn-ghost btn-sm" id="dashBtn" data-open-dash hidden><i class="fa-solid fa-gauge-high"></i> <span class="dtxt">Dashboard</span></button>
       <button class="btn btn-ghost btn-sm" data-open-search><i class="fa-solid fa-magnifying-glass"></i> Find order</button>
       <button class="btn btn-ghost btn-sm" id="authBtn" data-open-auth><i class="fa-regular fa-user"></i> <span id="authLabel">Log in</span></button>
       <button class="icon-btn" id="openCart" aria-label="Open cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="count">0</span></button>
@@ -312,10 +373,20 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
   </div>
 </div>
 <div class="drawer" id="drawer"><nav>
-  <a href="#games">Games</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#" data-open-search>Find order</a><a href="#" data-open-auth>Log in / Register</a>
+  <a href="#games">Games</a><a href="#how">How it works</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#" data-open-search>Find order</a><a href="#" id="dashLink" data-open-dash hidden>Dashboard</a><a href="#" data-open-auth>Log in / Register</a>
 </nav></div>
 
 <main id="top">
+  <section class="ads"><div class="wrap">
+    <div class="ad-wrap" id="adWrap" role="region" aria-roledescription="carousel" aria-label="Featured offers">
+      <div id="adSlides"></div>
+      <button class="ad-arrow ad-prev" id="adPrev" aria-label="Previous offer"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="ad-arrow ad-next" id="adNext" aria-label="Next offer"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="ad-dots" id="adDots"></div>
+      <i class="ad-bar" id="adBar"></i>
+    </div>
+  </div></section>
+
   <section class="hero"><div class="wrap hero-grid">
     <div>
       <span class="pill"><span class="dot"></span>Store online · instant delivery</span>
@@ -429,15 +500,22 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
     </form>
   </div>
   <div id="amAcct" class="acct" hidden>
-    <div id="avWrap"></div><h3 id="acName"></h3><p class="muted" id="acMail"></p>
+    <div id="avWrap"></div><h3 id="acName"></h3><p class="muted" id="acMail"></p><p class="muted" id="acRole" style="font-size:.85rem"></p>
+    <div id="verBox" hidden style="display:grid;gap:.5rem;width:100%"><button class="btn btn-primary btn-block" id="verSend" type="button">Send verification email</button><button class="btn btn-ghost btn-block" id="verRefresh" type="button">I verified, refresh</button></div>
     <button class="btn btn-ghost btn-block" id="logout" style="margin-top:.8rem"><i class="fa-solid fa-right-from-bracket"></i> Log out</button>
   </div>
 </div></div>
+<div class="dm" id="dm"><div class="dm-card" role="dialog" aria-label="Dashboard">
+  <div class="dm-top"><h3>Dashboard</h3><button class="icon-btn" id="closeDm" aria-label="Close dashboard"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="dm-tabs"><button class="on" data-dt="games">Games</button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
+  <div class="dm-body" id="dmBody"></div>
+</div></div>
+<div class="am" id="co"><div class="am-card" id="coBody"></div></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 /* Edit this list to change your catalog. price/old are in INR. */
-const GAMES=[
+let GAMES=[
  {id:1,name:"Elden Ring",genre:"RPG",price:2299,old:3999,icon:"fa-dragon",c:["#3b1d6e","#c9822b"],d:"Open-world action RPG from FromSoftware."},
  {id:2,name:"Cyberpunk 2077",genre:"RPG",price:1499,old:2999,icon:"fa-robot",c:["#6b1fa8","#f5e300"],d:"Futuristic open-world RPG set in Night City."},
  {id:3,name:"GTA V",genre:"Action",price:799,old:1999,icon:"fa-car-burst",c:["#143d2b","#f59e0b"],d:"Crime, heists and a huge open world."},
@@ -455,7 +533,7 @@ const $=s=>document.querySelector(s), money=n=>"₹"+n.toLocaleString("en-IN");
 let cart=[],genre="All",query="";
 try{cart=JSON.parse(localStorage.getItem("niuroo-cart")||"[]")}catch(e){}
 const save=()=>{try{localStorage.setItem("niuroo-cart",JSON.stringify(cart))}catch(e){}};
-const grad=g=>`linear-gradient(135deg,${g.c[0]},${g.c[1]})`;
+const grad=g=>g.img?`linear-gradient(rgba(10,4,16,.15),rgba(10,4,16,.15)),url('${g.img}') center/cover`:`linear-gradient(135deg,${g.c[0]},${g.c[1]})`;
 
 function renderChips(){
   const gs=["All",...new Set(GAMES.map(g=>g.genre))];
@@ -465,7 +543,7 @@ function renderGames(){
   const list=GAMES.filter(g=>(genre==="All"||g.genre===genre)&&g.name.toLowerCase().includes(query));
   $("#games-grid").innerHTML=list.length?list.map(g=>`
   <article class="gcard">
-    <a class="cover" href="#/product/${g.id}" style="background:${grad(g)}" aria-label="Open ${g.name}"><i class="fa-solid ${g.icon} glyph"></i>
+    <a class="cover" href="#/product/${g.id}" style="background:${grad(g)}" aria-label="Open ${g.name}">${g.img?"":`<i class="fa-solid ${g.icon} glyph"></i>`}
       ${g.old?`<span class="disc">-${Math.round((1-g.price/g.old)*100)}%</span>`:""}<span class="tag">${g.genre}</span></a>
     <div class="gbody"><h3><a href="#/product/${g.id}">${g.name}</a></h3><p class="muted">${g.d}</p>
       <div class="gfoot"><span class="price">${money(g.price)}${g.old?`<s>${money(g.old)}</s>`:""}</span>
@@ -540,14 +618,14 @@ const STOCK=[9,14,23,6,11,40,18,7,30,5,12,8];
 const addToCart=(id,q)=>{const i=find(id);i?i.q+=q:cart.push({id,q});save();renderCart()};
 let pTimer;
 function showProduct(g){
-  const stock=STOCK[g.id-1]||10, out=stock<1;
+  const stock=g.stock??(STOCK[g.id-1]||10), out=stock<1;
   $("#pp").innerHTML=`
   <a class="back" href="#games"><i class="fa-solid fa-arrow-left"></i> Back to games</a>
   <div class="pp-grid">
    <div class="pcard">
     <div class="p-head"><h1>${g.name}</h1><span class="status ${out?"off":""}"><i></i>${out?"Off":"On"}</span></div>
     <div class="pbanner" style="background:${grad(g)}">
-      <i class="fa-solid ${g.icon} glyph"></i>
+      ${g.img?"":`<i class="fa-solid ${g.icon} glyph"></i>`}
       <span class="pb-chip"><i class="fa-solid fa-crown"></i> Premium ${g.genre} key</span>
       <div><div class="pb-title">${g.name}</div><div class="pb-sub" style="margin-top:.8rem">Full access · Instant delivery</div></div>
       <div class="pb-feats">
@@ -592,6 +670,57 @@ function route(){
 }
 addEventListener("hashchange",route);
 
+/* ===== main ads slider: edit this list to change the banners ===== */
+const ADS=[
+ {id:1,badge:"Best deal on RPG",accent:"Instant key delivery",text:"Official key, activated in seconds. Ready to play right after checkout."},
+ {id:3,badge:"Top seller",accent:"Lowest price today",text:"Crime, heists and a huge open world at a price that is hard to beat."},
+ {id:7,badge:"Top-up deal",accent:"VP delivered fast",text:"Get Valorant Points for skins and battle pass without the wait."},
+ {id:2,badge:"Limited offer",accent:"Night City awaits",text:"Dive into the futuristic open-world RPG with instant digital delivery."}
+];
+let ai=0;
+(function(){
+  const wrap=$("#adWrap"),bar=$("#adBar");
+  let adN=ADS.length;
+  window.paintAds=()=>{
+    const L=ADS.map(a=>({a,g:GAMES.find(x=>x.id===a.id)})).filter(o=>o.g);
+    const use=L.length?L:GAMES.slice(0,4).map((g,i)=>({a:ADS[i%ADS.length],g}));
+    $("#adWrap").hidden=!use.length;if(!use.length)return;
+    adN=use.length;ai=0;
+  $("#adSlides").innerHTML=use.map(({a,g},i)=>{
+    const save=g.old?Math.round((1-g.price/g.old)*100):0;
+    return `<article class="slide ${i?"":"on"}" aria-roledescription="slide" aria-label="${i+1} of ${ADS.length}" style="background:radial-gradient(60rem 36rem at 82% 50%,${g.c[1]}55,transparent 65%),linear-gradient(120deg,rgba(10,4,16,.92) 20%,${g.c[0]}aa)">
+      <div>
+        <span class="ad-badge"><i class="fa-solid fa-fire"></i> ${a.badge}</span>
+        <h2>${g.name}</h2><h3 class="acc tgrad">${a.accent}</h3>
+        <p class="sub muted">${a.text}</p>
+        <div class="ad-price">${g.old?`<s>${money(g.old)}</s>`:""}<b>${money(g.price)}</b>${save?`<span class="ad-save">Save ${save}%</span>`:""}</div>
+        <div class="cta"><a class="btn btn-primary btn-lg" href="#/product/${g.id}"><i class="fa-solid fa-cart-shopping"></i> Buy now</a><a class="btn btn-ghost btn-lg" href="#games">Browse all <i class="fa-solid fa-arrow-right"></i></a></div>
+      </div>
+      <div class="ad-art"><div class="ad-card" style="background:linear-gradient(150deg,${g.c[0]},${g.c[1]})"><div><i class="fa-solid ${g.icon}"></i><span>${g.name}</span></div></div></div>
+    </article>`}).join("");
+  $("#adDots").innerHTML=use.map((o,i)=>`<button class="${i?"":"on"}" data-ad="${i}" aria-label="Show offer ${i+1}"></button>`).join("");
+    if(window.goAd)goAd(0);
+  };
+  paintAds();
+  window.goAd=n=>{
+    ai=(n+adN)%adN;
+    document.querySelectorAll(".slide").forEach((e,i)=>{e.classList.toggle("on",i===ai);e.setAttribute("aria-hidden",i!==ai)});
+    document.querySelectorAll("#adDots button").forEach((e,i)=>e.classList.toggle("on",i===ai));
+    bar.style.animation="none";void bar.offsetWidth;bar.style.animation="";
+  };
+  bar.addEventListener("animationend",()=>goAd(ai+1));
+  $("#adPrev").onclick=()=>goAd(ai-1);$("#adNext").onclick=()=>goAd(ai+1);
+  $("#adDots").addEventListener("click",e=>{const b=e.target.closest("[data-ad]");if(b)goAd(+b.dataset.ad)});
+  let x0=null;
+  wrap.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+  wrap.addEventListener("touchend",e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)goAd(ai+(d<0?1:-1));x0=null});
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    wrap.addEventListener("mousemove",e=>{const c=wrap.querySelector(".slide.on .ad-card");if(!c)return;const r=wrap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty("--ry",(x*18).toFixed(1)+"deg");c.style.setProperty("--rx",(-y*14).toFixed(1)+"deg")});
+    wrap.addEventListener("mouseleave",()=>wrap.querySelectorAll(".ad-card").forEach(c=>{c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}));
+  }
+  wrap.addEventListener("keydown",e=>{if(e.key==="ArrowRight")goAd(ai+1);if(e.key==="ArrowLeft")goAd(ai-1)});
+})();
+
 renderChips();renderGames();renderCart();route();
 </script>
 
@@ -634,10 +763,11 @@ const FIREBASE_CONFIG={
     }catch(e){console.error(e)}
   }
   function paint(){
+    dispatchEvent(new CustomEvent("niuroo-auth",{detail:user}));
     const first=user?(user.displayName||user.email||user.phoneNumber||"Account").split(" ")[0]:"Log in";
     $("#authBtn").innerHTML=user&&user.photoURL?`<img src="${user.photoURL}" alt="" referrerpolicy="no-referrer"> <span>${first}</span>`:`<i class="fa-regular fa-user"></i> <span>${first}</span>`;
     view(user?"acct":"auth");
-    if(user){const n=user.displayName||user.phoneNumber||"Your account";$("#acName").textContent=n;$("#acMail").textContent=user.email||(user.displayName?user.phoneNumber||"":"");
+    if(user){const n=user.displayName||user.phoneNumber||"Your account";$("#acName").textContent=n;$("#acMail").textContent=user.email||(user.displayName?user.phoneNumber||"":"");const adm=typeof ADMIN_EMAILS!=="undefined"&&ADMIN_EMAILS.some(x=>x.toLowerCase()===(user.email||"").toLowerCase());$("#verBox").hidden=!(user.email&&!user.emailVerified);$("#acRole").textContent=adm?(user.emailVerified?"Admin: Dashboard button is in the top bar.":"Email not verified. Send the verification email below, or log out and use Continue with Google."):"";
       $("#avWrap").innerHTML=user.photoURL?`<img class="av" src="${user.photoURL}" alt="" referrerpolicy="no-referrer">`:`<div class="av">${n[0]==="+"?"<i class=\"fa-solid fa-mobile-screen-button\"></i>":n[0].toUpperCase()}</div>`}
   }
   function setMode(m){
@@ -676,9 +806,172 @@ const FIREBASE_CONFIG={
     if(!ready())return;
     try{await fb.A.sendPasswordResetEmail(fb.auth,email);say("Reset link sent. Check your inbox.",true)}catch(err){fail(err)}
   };
+  $("#verSend").onclick=async()=>{try{await fb.A.sendEmailVerification(fb.auth.currentUser);toast("Verification email sent. Check inbox and spam.")}catch(e){toast(MSG[e.code]||e.message||"Could not send email.")}};
+  $("#verRefresh").onclick=async()=>{try{const u=fb.auth.currentUser;await u.reload();await u.getIdToken(true);user=fb.auth.currentUser;paint();toast(user.emailVerified?"Email verified":"Not verified yet. Open the link in the email first.")}catch(e){toast(e.message||"Could not refresh.")}};
   $("#logout").onclick=async()=>{if(fb){await fb.A.signOut(fb.auth)}close()};
   init();
 })();
 </script>
+<script>
+/* ===== Admin dashboard + live store data (Firestore) =====
+   ADMIN_EMAILS: yahan apna Gmail likho (same email jisse Google login karoge). */
+const ADMIN_EMAILS=["ruperjaat@gmail.com"];
+(()=>{
+  const $=s=>document.querySelector(s);
+  const esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  let db=null,F=null,me=null,STORE={},isAdmin=false,seeded=false,editing=null,tab="games",pImg="",pQR="";
+  const DEFAULTS=GAMES.map((g,i)=>({...g,stock:STOCK[i]||10,order:i}));
+  GAMES=DEFAULTS;
+  const okImg=u=>!u||/^(https:\/\/[^\s'"()]+|data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+)$/.test(u);
+  const fire=e=>e&&e.code==="permission-denied"?"Permission denied. Paste the Firestore rules and put your verified email in them.":(e&&e.message)||"Something went wrong.";
+  const toData=(file,max)=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);const u=c.toDataURL("image/jpeg",.82);u.length>700000?rej():res(u)};im.onerror=rej;im.src=r.result};r.onerror=rej;r.readAsDataURL(file)});
+
+  function refresh(){
+    cart=cart.filter(i=>GAMES.some(g=>g.id===i.id));save();
+    if(genre!=="All"&&!GAMES.some(g=>g.genre===genre))genre="All";
+    renderChips();renderGames();renderCart();if(window.paintAds)paintAds();
+    if($("#sm").classList.contains("open"))renderSearch();
+    if(location.hash.startsWith("#/product/"))route();
+    if($("#dm").classList.contains("open")&&!editing&&tab==="games")renderDash();
+  }
+  async function init(){
+    if(!FIREBASE_CONFIG.apiKey)return;
+    try{
+      const base="https://www.gstatic.com/firebasejs/10.12.2/";
+      const [{initializeApp},f]=await Promise.all([import(base+"firebase-app.js"),import(base+"firebase-firestore.js")]);
+      F=f;db=f.getFirestore(initializeApp(FIREBASE_CONFIG));
+      f.onSnapshot(f.collection(db,"games"),snap=>{seeded=!snap.empty;GAMES=snap.empty?DEFAULTS:snap.docs.map(d=>d.data()).sort((a,b)=>(a.order??0)-(b.order??0)||a.id-b.id);refresh()},e=>console.error(e));
+      f.onSnapshot(f.doc(db,"settings","store"),d=>{STORE=d.exists()?d.data():{}},()=>{});
+    }catch(e){console.error(e)}
+  }
+  addEventListener("niuroo-auth",e=>{
+    me=e.detail;
+    isAdmin=!!(me&&me.emailVerified&&ADMIN_EMAILS.some(x=>x.toLowerCase()===(me.email||"").toLowerCase()));
+    $("#dashBtn").hidden=!isAdmin;$("#dashLink").hidden=!isAdmin;
+    if(!isAdmin)$("#dm").classList.remove("open");
+  });
+
+  /* ---------- dashboard ---------- */
+  const err=(id,m)=>{const x=$(id);x.textContent=m;x.className="aerr on"};
+  function renderDash(){
+    document.querySelectorAll(".dm-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.dt===tab));
+    const B=$("#dmBody");
+    if(tab==="games")return editing?gameForm(B):gameList(B);
+    if(tab==="checkout")return checkoutForm(B);
+    return ordersView(B);
+  }
+  function gameList(B){
+    B.innerHTML=`<div class="dm-bar"><button class="btn btn-primary btn-sm" data-act="new"><i class="fa-solid fa-plus"></i> Add game</button>${seeded?"":`<button class="btn btn-ghost btn-sm" data-act="seed">Save default games to database</button>`}</div>`
+    +GAMES.map(g=>`<div class="dm-row"><div class="th" style="background:${grad(g)}"></div><div class="t"><b>${esc(g.name)}</b><small>${esc(g.genre)} · ${money(g.price)} · stock ${g.stock??0}</small></div><button class="btn btn-ghost btn-sm" data-act="edit" data-id="${g.id}">Edit</button><button class="btn btn-ghost btn-sm" data-act="del" data-id="${g.id}">Delete</button></div>`).join("");
+  }
+  function gameForm(B){
+    const g=editing==="new"?{name:"",genre:"",price:"",old:"",stock:10,icon:"fa-gamepad",c:["#3b1d6e","#c9822b"],d:"",img:""}:GAMES.find(x=>x.id===editing);
+    pImg=g.img&&g.img.startsWith("data:")?g.img:"";
+    B.innerHTML=`<button class="back" type="button" data-act="cancel"><i class="fa-solid fa-arrow-left"></i> Back to games</button>
+    <form class="af" id="gf" novalidate>
+      <label>Name<input id="f-name" value="${esc(g.name)}"></label>
+      <div class="two"><label>Genre<input id="f-genre" value="${esc(g.genre)}" placeholder="RPG"></label><label>Stock<input id="f-stock" type="number" min="0" value="${g.stock??0}"></label></div>
+      <div class="two"><label>Price (₹)<input id="f-price" type="number" min="0" value="${g.price}"></label><label>Old price (₹, optional)<input id="f-old" type="number" min="0" value="${g.old||""}"></label></div>
+      <label>Description<input id="f-d" value="${esc(g.d)}"></label>
+      <label>Image link (https) <input id="f-img" value="${pImg?"":esc(g.img||"")}" placeholder="https://..."></label>
+      <label>or upload image<input id="f-file" type="file" accept="image/*"></label>
+      <div class="two"><label>Colour 1<input id="f-c0" type="color" value="${g.c[0]}"></label><label>Colour 2<input id="f-c1" type="color" value="${g.c[1]}"></label></div>
+      <label>Icon (like fa-gamepad)<input id="f-icon" value="${esc(g.icon)}"></label>
+      <div class="aerr" id="gerr"></div><button class="btn btn-primary btn-lg btn-block" type="submit">Save game</button>
+    </form>`;
+  }
+  async function seed(){const b=F.writeBatch(db);DEFAULTS.forEach(g=>b.set(F.doc(db,"games",String(g.id)),g));await b.commit()}
+  async function saveGame(e){
+    e.preventDefault();const v=id=>$("#"+id).value.trim();
+    const name=v("f-name"),price=parseFloat(v("f-price"));
+    if(!name)return err("#gerr","Enter a name.");
+    if(isNaN(price)||price<0)return err("#gerr","Enter a valid price.");
+    const img=pImg||v("f-img");if(!okImg(img))return err("#gerr","Image must be an https link or an uploaded file.");
+    const icon=v("f-icon")||"fa-gamepad";if(!/^fa-[a-z0-9-]+$/.test(icon))return err("#gerr","Icon must look like fa-gamepad.");
+    const id=editing==="new"?Date.now():editing,prev=GAMES.find(x=>x.id===id);
+    const data={id,name,genre:v("f-genre")||"Other",price,old:parseFloat(v("f-old"))||null,stock:Math.max(0,parseInt(v("f-stock"))||0),d:v("f-d"),img,icon,c:[v("f-c0"),v("f-c1")],order:prev?(prev.order??0):Math.max(-1,...GAMES.map(g=>g.order??0))+1};
+    try{if(!seeded)await seed();await F.setDoc(F.doc(db,"games",String(id)),data);editing=null;toast("Game saved");renderDash()}catch(x){err("#gerr",fire(x))}
+  }
+  function checkoutForm(B){
+    pQR=STORE.qr||"";
+    B.innerHTML=`<form class="af" id="cf" novalidate>
+      <p class="muted" style="font-size:.9rem">Customers pay by UPI and send you the transaction ID. You verify it in Orders and deliver.</p>
+      <label>UPI ID<input id="s-upi" value="${esc(STORE.upi||"")}" placeholder="name@bank"></label>
+      <label>Payee name<input id="s-name" value="${esc(STORE.upiName||"")}" placeholder="Niuroo Games"></label>
+      <label>Payment QR image (optional)<input id="q-file" type="file" accept="image/*"></label>
+      <label>Contact link (WhatsApp / Discord, https)<input id="s-contact" value="${esc(STORE.contact||"")}" placeholder="https://wa.me/91XXXXXXXXXX"></label>
+      <label>Note shown at checkout<input id="s-note" value="${esc(STORE.note||"")}" placeholder="Delivery within 10 minutes after verification"></label>
+      <div class="aerr" id="cerr"></div><button class="btn btn-primary btn-lg btn-block" type="submit">Save checkout settings</button></form>`;
+  }
+  async function saveCheckout(e){
+    e.preventDefault();const v=id=>$("#"+id).value.trim();
+    const upi=v("s-upi"),contact=v("s-contact");
+    if(upi&&!/^[\w.\-]{2,}@[A-Za-z]{2,}$/.test(upi))return err("#cerr","UPI ID looks wrong. Example: name@okaxis");
+    if(contact&&!/^https:\/\/[^\s'"<>]+$/.test(contact))return err("#cerr","Contact link must start with https://");
+    try{await F.setDoc(F.doc(db,"settings","store"),{upi,upiName:v("s-name"),contact,note:v("s-note"),qr:pQR||""});toast("Checkout settings saved")}catch(x){err("#cerr",fire(x))}
+  }
+  const STAT=["pending","paid","delivered","rejected"];
+  async function ordersView(B){
+    B.innerHTML=`<div class="dm-bar"><button class="btn btn-ghost btn-sm" data-act="reload"><i class="fa-solid fa-rotate"></i> Refresh</button></div><p class="muted">Loading orders…</p>`;
+    try{
+      const s=await F.getDocs(F.query(F.collection(db,"orders"),F.orderBy("created","desc"),F.limit(50)));
+      B.innerHTML=`<div class="dm-bar"><button class="btn btn-ghost btn-sm" data-act="reload"><i class="fa-solid fa-rotate"></i> Refresh</button></div>`+(s.empty?`<p class="muted">No orders yet.</p>`:s.docs.map(d=>{const o=d.data();return `<div class="dm-row" style="flex-wrap:wrap"><div class="t" style="flex:1 1 260px"><b>${money(+o.total||0)} · ${esc(o.email||o.name||"customer")}</b><small>${(o.items||[]).map(i=>esc(i.q)+"× "+esc(i.name)).join(", ")}<br>UTR: ${esc(o.txn)}</small></div><select data-os="${d.id}">${STAT.map(x=>`<option ${x===o.status?"selected":""}>${x}</option>`).join("")}</select><input data-od="${d.id}" placeholder="Key / delivery details" value="${esc(o.delivery||"")}"><button class="btn btn-primary btn-sm" data-act="osave" data-id="${d.id}">Save</button></div>`}).join(""));
+    }catch(x){B.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
+  }
+
+  document.addEventListener("click",async e=>{
+    if(e.target.closest("[data-open-dash]")){e.preventDefault();if(!isAdmin)return;document.getElementById("drawer").classList.remove("open");tab="games";editing=null;$("#dm").classList.add("open");renderDash();return}
+    const t=e.target.closest("[data-act],[data-dt]");if(!t)return;
+    if(t.dataset.dt){tab=t.dataset.dt;editing=null;renderDash();return}
+    const a=t.dataset.act,id=+t.dataset.id;
+    if(a==="new"){editing="new";renderDash()}
+    if(a==="edit"){editing=id;renderDash()}
+    if(a==="cancel"){editing=null;renderDash()}
+    if(a==="reload")renderDash();
+    if(a==="seed"){try{await seed();toast("Default games saved")}catch(x){toast(fire(x))}}
+    if(a==="del"&&confirm("Delete this game?")){try{await F.deleteDoc(F.doc(db,"games",String(id)));toast("Deleted")}catch(x){toast(fire(x))}}
+    if(a==="osave"){const k=t.dataset.id;try{await F.updateDoc(F.doc(db,"orders",k),{status:document.querySelector(`[data-os="${k}"]`).value,delivery:document.querySelector(`[data-od="${k}"]`).value.trim().slice(0,500)});toast("Order updated")}catch(x){toast(fire(x))}}
+  });
+  document.addEventListener("submit",e=>{if(e.target.id==="gf")saveGame(e);if(e.target.id==="cf")saveCheckout(e)});
+  document.addEventListener("change",async e=>{
+    const f=e.target;if(f.id!=="f-file"&&f.id!=="q-file")return;const file=f.files[0];if(!file)return;
+    try{const u=await toData(file,f.id==="f-file"?800:520);f.id==="f-file"?pImg=u:pQR=u;toast("Image ready. Press Save.")}catch(x){toast("Image too big or unreadable. Try a smaller one.")}
+  });
+  $("#closeDm").onclick=()=>$("#dm").classList.remove("open");
+  $("#dm").addEventListener("click",e=>{if(e.target.id==="dm")$("#dm").classList.remove("open")});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("#dm").classList.remove("open");$("#co").classList.remove("open")}});
+
+  /* ---------- customer checkout ---------- */
+  function coShow(h){$("#coBody").innerHTML=`<div class="am-head"><b style="font-size:1.2rem">Checkout</b><button class="icon-btn" id="closeCo" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>`+h;$("#closeCo").onclick=()=>$("#co").classList.remove("open");$("#co").classList.add("open")}
+  function openCheckout(){
+    if(!cart.length)return;
+    if(!me){$("#cart").classList.remove("open");toast("Log in first to place an order");document.querySelector("[data-open-auth]").click();return}
+    if(!db||!STORE.upi){$("#cart").classList.remove("open");coShow(`<p class="muted">Payments are not set up yet. Please contact the store.</p>`);return}
+    const rows=cart.map(i=>({g:GAMES.find(x=>x.id===i.id),q:i.q}));
+    const bad=rows.find(r=>r.q>(r.g.stock??0));if(bad){toast(bad.g.name+": only "+(bad.g.stock??0)+" in stock");return}
+    const items=rows.map(r=>({id:r.g.id,name:r.g.name,price:r.g.price,q:r.q})),total=items.reduce((a,i)=>a+i.price*i.q,0);
+    const link=`upi://pay?pa=${encodeURIComponent(STORE.upi)}&pn=${encodeURIComponent(STORE.upiName||"Niuroo Games")}&am=${total}&cu=INR&tn=${encodeURIComponent("Niuroo order")}`;
+    $("#cart").classList.remove("open");
+    coShow(`<div class="items" style="padding:0;margin-bottom:1rem">${items.map(i=>`<div class="item"><div class="t"><b>${esc(i.name)}</b><small>${i.q} × ${money(i.price)}</small></div><b>${money(i.price*i.q)}</b></div>`).join("")}</div>
+      <div class="total" style="margin-bottom:1rem"><span>Total</span><span>${money(total)}</span></div>
+      <a class="btn btn-primary btn-lg btn-block" href="${esc(link)}"><i class="fa-solid fa-mobile-screen-button"></i> Pay ${money(total)} with UPI app</a>
+      ${STORE.qr?`<img src="${esc(STORE.qr)}" alt="Payment QR" style="width:200px;margin:1rem auto 0;border-radius:12px;background:#fff">`:""}
+      <p class="muted" style="font-size:.85rem;margin:1rem 0 .6rem">UPI ID: <b>${esc(STORE.upi)}</b>${STORE.note?`<br>${esc(STORE.note)}`:""}</p>
+      <form class="af" id="of" novalidate><label>UPI transaction ID (UTR) after paying<input id="co-txn" maxlength="40" placeholder="12-digit number"></label><div class="aerr" id="oerr"></div><button class="btn btn-ghost btn-lg btn-block" type="submit">I have paid, place order</button></form>`);
+    $("#of").onsubmit=async ev=>{
+      ev.preventDefault();const txn=$("#co-txn").value.trim();
+      if(txn.length<6)return err("#oerr","Enter the UPI transaction ID.");
+      try{
+        const r=await F.addDoc(F.collection(db,"orders"),{uid:me.uid,email:me.email||"",name:me.displayName||"",items,total,txn,status:"pending",delivery:"",created:F.serverTimestamp()});
+        cart=[];save();renderCart();
+        coShow(`<div class="acct"><i class="fa-solid fa-circle-check" style="font-size:3rem;color:rgb(var(--pos))"></i><h3>Order placed</h3><p class="muted">We will verify your payment and deliver soon.<br>Order ref: ${esc(r.id.slice(0,8))}</p>${STORE.contact?`<a class="btn btn-primary" href="${esc(STORE.contact)}" target="_blank" rel="noopener">Contact us</a>`:""}</div>`);
+      }catch(x){err("#oerr",fire(x))}
+    };
+  }
+  $("#checkout").onclick=openCheckout;
+  init();
+})();
+</script>
 </body>
+
 </html>
