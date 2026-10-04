@@ -213,7 +213,28 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
 .ad-dots button.on{width:28px;background:rgb(var(--accent))}
 .ad-bar{position:absolute;left:0;bottom:0;height:4px;width:100%;background:var(--grad-accent);transform-origin:left;animation:adbar 6s linear forwards;z-index:3}
 @keyframes adbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.ad-wrap:hover .ad-bar,.ad-wrap:focus-within .ad-bar{animation-play-state:paused}
+@media(hover:hover){.ad-wrap:hover .ad-bar{animation-play-state:paused}}
+
+.slide::before{content:"";position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(40% 40% at 20% 30%,rgba(var(--accent),.3),transparent 70%),radial-gradient(35% 35% at 80% 70%,rgba(var(--accent2),.26),transparent 70%);animation:drift 12s ease-in-out infinite alternate}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.08) 50%,transparent 60%);background-size:250% 100%;animation:streak 6s linear infinite}
+.slide>.stg,.slide>.ad-art{position:relative;z-index:1}
+.slide>.fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fx i{position:absolute;bottom:-40px;border:2px solid rgba(255,255,255,.4);background:rgba(var(--accent),.12);animation:fxup linear infinite}
+.slide.on .stg>*{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.slide.on .stg>*:nth-child(2){animation-delay:.08s}.slide.on .stg>*:nth-child(3){animation-delay:.16s}.slide.on .stg>*:nth-child(4){animation-delay:.24s}.slide.on .stg>*:nth-child(5){animation-delay:.32s}.slide.on .stg>*:nth-child(6){animation-delay:.4s}
+.slide h2{text-shadow:0 0 34px rgba(var(--accent),.5)}
+.slide h3.acc{background-size:220% 100%;animation:flow 4s ease-in-out infinite alternate}
+.ad-price b{animation:pricepulse 2.4s ease-in-out 1s infinite}
+.ad-badge{animation:badgeglow 2.4s ease-in-out infinite}
+@keyframes drift{from{transform:translate(-4%,-3%) scale(1)}to{transform:translate(5%,4%) scale(1.18)}}
+@keyframes streak{from{background-position:200% 0}to{background-position:-100% 0}}
+@keyframes fxup{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.85}100%{transform:translateY(-640px) rotate(360deg);opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes pricepulse{0%,100%{box-shadow:0 10px 30px -10px rgba(var(--accent),.9)}50%{box-shadow:0 0 40px 4px rgba(var(--accent),.8)}}
+@keyframes flow{from{background-position:0 0}to{background-position:100% 0}}
+@keyframes badgeglow{0%,100%{box-shadow:0 0 0 0 rgba(var(--accent),.6)}50%{box-shadow:0 0 18px 3px rgba(var(--accent),.7)}}
+.af select{height:46px;padding:0 .95rem;border-radius:12px;border:1px solid rgba(var(--border),.16);background:rgba(0,0,0,.25);color:#fff;font:inherit}
+.af select option,.dm select option{background:#1c1028;color:#fff}
 
 /* product page */
 [hidden]{display:none!important}
@@ -303,6 +324,25 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
 @media(max-width:520px){.two{grid-template-columns:1fr}}
 .af input[type=file]{height:auto;padding:.6rem}.af input[type=color]{padding:3px}
 
+.actabs{display:grid;grid-template-columns:repeat(3,1fr);padding:4px;border-radius:14px;background:rgba(0,0,0,.3);margin-bottom:1.2rem}
+.actabs button{height:40px;border-radius:11px;font-weight:600;font-size:.86rem;color:rgba(255,255,255,.6)}
+.actabs button.on{background:var(--grad-accent);color:#fff}
+.am-card.wide{max-width:680px}
+.det{width:100%;display:grid;gap:.4rem;text-align:left;margin-top:.6rem}
+.det div{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .8rem;border-radius:10px;background:rgba(255,255,255,.04);font-size:.88rem}
+.det span{color:rgba(255,255,255,.55)}.det b{font-weight:600;text-align:right;word-break:break-word}
+.af textarea,.tk-send textarea{padding:.7rem .95rem;border-radius:12px;border:1px solid rgba(var(--border),.16);background:rgba(0,0,0,.25);color:#fff;font:inherit;font-weight:400;resize:vertical;width:100%}
+.af textarea:focus{outline:none;border-color:rgb(var(--accent))}
+.hist{margin:1.2rem 0 .6rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.tkrow{cursor:pointer}.tkrow:hover{background:rgba(255,255,255,.08)}
+.pill-st{padding:.2rem .65rem;border-radius:99px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;flex:none}
+.st-open{background:rgba(var(--pos),.18);color:rgb(var(--pos))}.st-closed{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6)}
+.tk-msgs{display:grid;gap:.5rem;max-height:46vh;overflow:auto;padding:.6rem;margin:.6rem 0;border-radius:14px;background:rgba(0,0,0,.2)}
+.bub{max-width:84%;padding:.6rem .85rem;border-radius:14px;background:rgba(255,255,255,.08);justify-self:start;white-space:pre-wrap;word-break:break-word;font-size:.92rem;text-align:left}
+.bub.admin{justify-self:end;background:rgba(var(--accent),.24)}
+.bub small{display:block;opacity:.55;font-size:.7rem;margin-top:.25rem}
+.tk-send{margin-top:.4rem}
+
 /* auth */
 .am{position:fixed;inset:0;z-index:88;display:none;background:rgba(5,2,9,.78);backdrop-filter:blur(8px);padding:calc(4vh + var(--safe-t)) 1rem calc(2vh + var(--safe-b));overflow:auto}
 .am.open{display:block}
@@ -352,6 +392,56 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
 .toast{position:fixed;left:50%;bottom:calc(1.5rem + var(--safe-b));transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;z-index:90;padding:.8rem 1.2rem;border-radius:12px;background:rgb(var(--card));border:1px solid rgba(var(--accent),.5);font-size:.9rem;transition:.25s}
 .toast.on{opacity:1;transform:translateX(-50%)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---- user dropdown menu ---- */
+.nav-right{position:relative}
+.um{position:absolute;right:0;top:calc(100% + 12px);width:min(270px,86vw);z-index:70;padding:.5rem;border-radius:16px;background:rgb(var(--card));border:1px solid rgba(var(--accent),.35);box-shadow:0 24px 60px -12px rgba(0,0,0,.7),0 0 40px -18px rgba(var(--accent),.6);animation:slide .18s ease-out}
+.um[hidden]{display:none}
+.um-h{padding:.7rem .8rem .8rem;border-bottom:1px solid rgba(var(--border),.12);margin-bottom:.35rem}
+.um-h b{display:block;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.um-h small{display:block;margin-top:.15rem;font-size:.82rem;color:rgba(var(--text),.6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.um-i{display:flex;align-items:center;gap:.8rem;width:100%;padding:.7rem .8rem;border-radius:10px;font:inherit;font-size:.92rem;font-weight:500;color:rgba(var(--text),.88);text-align:left;background:none;border:0;cursor:pointer}
+.um-i i{width:18px;text-align:center;color:rgba(var(--text),.6)}
+.um-i:hover,.um-i:focus-visible{background:rgba(255,255,255,.07);color:#fff;outline:0}
+.um-i:hover i{color:rgb(var(--accent))}
+.um-i[hidden]{display:none}
+.um-sep{height:1px;margin:.35rem .4rem;background:rgba(var(--border),.12)}
+.um-out,.um-out i{color:#ff6b81}
+.um-out:hover{background:rgba(255,107,129,.1);color:#ff6b81}
+body.u-in #authBtn::after{content:"\f078";font-family:"Font Awesome 6 Free";font-weight:900;font-size:.6rem;margin-left:.35rem;transition:transform .2s}
+body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
+
+/* ---- user dashboard ---- */
+.ud-tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem 0;flex-wrap:wrap}
+.ud-tabs button{padding:.5rem 1rem;border-radius:99px;border:1px solid rgba(var(--border),.14);font-size:.86rem;font-weight:600}
+.ud-tabs button.on{background:var(--grad-accent);border-color:transparent}
+.ud-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.6rem}
+.ud-stat{padding:.9rem 1rem;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(var(--border),.1)}
+.ud-stat b{display:block;font-size:1.4rem;font-family:var(--font-display)}.ud-stat span{font-size:.78rem;color:rgba(255,255,255,.55)}
+.ud-h{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.5);margin:.6rem 0 0}
+.st-o-pending{background:rgba(var(--warn),.18);color:rgb(var(--warn))}.st-o-paid{background:rgba(var(--accent),.2);color:rgb(var(--accent))}
+.st-o-delivered{background:rgba(var(--pos),.18);color:rgb(var(--pos))}.st-o-rejected{background:rgba(var(--err),.18);color:rgb(var(--err))}
+.od-key{flex:1 1 100%;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.6rem .8rem;border-radius:10px;background:rgba(0,0,0,.28)}
+.od-key span{font-size:.76rem;color:rgba(255,255,255,.55);width:100%}.od-key code{flex:1;min-width:0;word-break:break-all;font-size:.88rem}
+
+/* ---- user pages ---- */
+.up{position:fixed;inset:0;z-index:45;display:none;overflow:auto;background:rgb(var(--bg));padding:calc(5.4rem + var(--safe-t)) 0 3rem}
+.up.open{display:block}
+.up-in{max-width:1100px;margin:0 auto;padding:0 1.2rem;display:grid;gap:1rem}
+.up-back{justify-self:start}
+.up-hero{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap;padding:1.8rem;border-radius:22px;border:1px solid rgba(var(--accent),.3);background:linear-gradient(135deg,rgba(var(--accent),.2),rgba(var(--card),.9))}
+.up-hero h1{font-size:clamp(1.8rem,5vw,2.6rem);margin:.3rem 0}
+.up-me{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid rgba(var(--border),.12)}
+.up-me a{display:block;font-size:.85rem;font-weight:600;color:rgb(var(--accent))}
+.up-box{padding:1.2rem;border-radius:18px;background:rgba(var(--card),.75);border:1px solid rgba(var(--border),.1)}
+.up-warn{display:flex;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;border-radius:16px;background:rgba(var(--warn),.08);border:1px solid rgba(var(--warn),.3)}
+.up-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem}
+.up-tile{text-align:left;display:grid;gap:.35rem;padding:1.1rem;border-radius:16px;background:rgba(var(--card),.75);border:1px solid rgba(var(--border),.12);transition:.2s;cursor:pointer;color:inherit;font:inherit}
+.up-tile:hover{border-color:rgba(var(--accent),.6);transform:translateY(-2px)}
+.up-tile i{color:rgb(var(--accent));font-size:1.15rem}.up-tile small{color:rgba(255,255,255,.55)}
+.up-bar{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin:.7rem 0}.up-bar i{display:block;height:100%;background:var(--grad-accent)}
+.up-tiers{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;font-size:.74rem;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.up-h{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.7);margin:.8rem 0 0}
 </style>
 </head>
 <body>
@@ -369,6 +459,20 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
       <button class="btn btn-ghost btn-sm" id="authBtn" data-open-auth><i class="fa-regular fa-user"></i> <span id="authLabel">Log in</span></button>
       <button class="icon-btn" id="openCart" aria-label="Open cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="count">0</span></button>
       <button class="icon-btn menu-btn" id="openMenu" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="um" id="um" role="menu" aria-label="Account menu" hidden>
+        <div class="um-h"><b id="umName"></b><small id="umMail"></small></div>
+        <button class="um-i" type="button" role="menuitem" data-um="dash"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+        <button class="um-i" type="button" role="menuitem" data-um="orders"><i class="fa-solid fa-box"></i> My orders</button>
+        <button class="um-i" type="button" role="menuitem" data-um="library"><i class="fa-solid fa-gamepad"></i> My library</button>
+        <button class="um-i" type="button" role="menuitem" data-um="rewards"><i class="fa-solid fa-gift"></i> Rewards</button>
+        <button class="um-i" type="button" role="menuitem" data-um="notifs"><i class="fa-solid fa-bell"></i> Notifications</button>
+        <button class="um-i" type="button" role="menuitem" data-um="tickets"><i class="fa-solid fa-life-ring"></i> Support tickets</button>
+        <button class="um-i" type="button" role="menuitem" data-um="settings"><i class="fa-solid fa-gear"></i> Account settings</button>
+
+        <div class="um-sep"></div>
+        <button class="um-i" type="button" role="menuitem" id="umAdmin" data-open-dash hidden><i class="fa-solid fa-user-shield"></i> Admin panel</button>
+        <button class="um-i um-out" type="button" role="menuitem" data-um="logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</button>
+      </div>
     </div>
   </div>
 </div>
@@ -499,15 +603,21 @@ footer{margin-top:2rem;border-top:1px solid rgba(var(--border),.1);background:rg
       <button class="btn btn-primary btn-lg btn-block" id="asub" type="submit">Log in</button>
     </form>
   </div>
-  <div id="amAcct" class="acct" hidden>
+  <div id="amAcct" hidden>
+    <div class="actabs"><button class="on" data-ac="account">Account</button><button data-ac="tickets">Tickets</button><button data-ac="edit">Edit profile</button></div>
+    <div id="acPane-account" class="acct">
     <div id="avWrap"></div><h3 id="acName"></h3><p class="muted" id="acMail"></p><p class="muted" id="acRole" style="font-size:.85rem"></p>
     <div id="verBox" hidden style="display:grid;gap:.5rem;width:100%"><button class="btn btn-primary btn-block" id="verSend" type="button">Send verification email</button><button class="btn btn-ghost btn-block" id="verRefresh" type="button">I verified, refresh</button></div>
+    <div class="det" id="acDetails"></div>
     <button class="btn btn-ghost btn-block" id="logout" style="margin-top:.8rem"><i class="fa-solid fa-right-from-bracket"></i> Log out</button>
+    </div>
+    <div id="acPane-tickets" hidden></div><div id="acPane-edit" hidden></div>
   </div>
 </div></div>
+<div class="up" id="up" role="region" aria-label="My account"><div class="up-in" id="upBody"></div></div>
 <div class="dm" id="dm"><div class="dm-card" role="dialog" aria-label="Dashboard">
   <div class="dm-top"><h3>Dashboard</h3><button class="icon-btn" id="closeDm" aria-label="Close dashboard"><i class="fa-solid fa-xmark"></i></button></div>
-  <div class="dm-tabs"><button class="on" data-dt="games">Games</button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
+  <div class="dm-tabs"><button class="on" data-dt="games">Games</button><button data-dt="ads">Ads</button><button data-dt="tickets">Tickets<span id="tkBadge"></span></button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
   <div class="dm-body" id="dmBody"></div>
 </div></div>
 <div class="am" id="co"><div class="am-card" id="coBody"></div></div>
@@ -671,7 +781,7 @@ function route(){
 addEventListener("hashchange",route);
 
 /* ===== main ads slider: edit this list to change the banners ===== */
-const ADS=[
+let ADS=[
  {id:1,badge:"Best deal on RPG",accent:"Instant key delivery",text:"Official key, activated in seconds. Ready to play right after checkout."},
  {id:3,badge:"Top seller",accent:"Lowest price today",text:"Crime, heists and a huge open world at a price that is hard to beat."},
  {id:7,badge:"Top-up deal",accent:"VP delivered fast",text:"Get Valorant Points for skins and battle pass without the wait."},
@@ -681,18 +791,20 @@ let ai=0;
 (function(){
   const wrap=$("#adWrap"),bar=$("#adBar");
   let adN=ADS.length;
+  const E=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const fx=()=>Array.from({length:9},(_,k)=>{const z=8+Math.random()*22;return `<i style="left:${(Math.random()*96).toFixed(0)}%;width:${z.toFixed(0)}px;height:${z.toFixed(0)}px;border-radius:${k%3===0?"3px":"50%"};animation-duration:${(7+Math.random()*8).toFixed(1)}s;animation-delay:${(-Math.random()*12).toFixed(1)}s"></i>`}).join("");
   window.paintAds=()=>{
-    const L=ADS.map(a=>({a,g:GAMES.find(x=>x.id===a.id)})).filter(o=>o.g);
-    const use=L.length?L:GAMES.slice(0,4).map((g,i)=>({a:ADS[i%ADS.length],g}));
+    const use=ADS.filter(a=>a.active!==false).map(a=>({a,g:GAMES.find(x=>x.id===a.id)})).filter(o=>o.g);
     $("#adWrap").hidden=!use.length;if(!use.length)return;
     adN=use.length;ai=0;
   $("#adSlides").innerHTML=use.map(({a,g},i)=>{
     const save=g.old?Math.round((1-g.price/g.old)*100):0;
     return `<article class="slide ${i?"":"on"}" aria-roledescription="slide" aria-label="${i+1} of ${ADS.length}" style="background:radial-gradient(60rem 36rem at 82% 50%,${g.c[1]}55,transparent 65%),linear-gradient(120deg,rgba(10,4,16,.92) 20%,${g.c[0]}aa)">
-      <div>
-        <span class="ad-badge"><i class="fa-solid fa-fire"></i> ${a.badge}</span>
-        <h2>${g.name}</h2><h3 class="acc tgrad">${a.accent}</h3>
-        <p class="sub muted">${a.text}</p>
+      <div class="fx" aria-hidden="true">${fx()}</div>
+      <div class="stg">
+        <span class="ad-badge"><i class="fa-solid fa-fire"></i> ${E(a.badge)}</span>
+        <h2>${g.name}</h2><h3 class="acc tgrad">${E(a.accent)}</h3>
+        <p class="sub muted">${E(a.text)}</p>
         <div class="ad-price">${g.old?`<s>${money(g.old)}</s>`:""}<b>${money(g.price)}</b>${save?`<span class="ad-save">Save ${save}%</span>`:""}</div>
         <div class="cta"><a class="btn btn-primary btn-lg" href="#/product/${g.id}"><i class="fa-solid fa-cart-shopping"></i> Buy now</a><a class="btn btn-ghost btn-lg" href="#games">Browse all <i class="fa-solid fa-arrow-right"></i></a></div>
       </div>
@@ -706,7 +818,7 @@ let ai=0;
     ai=(n+adN)%adN;
     document.querySelectorAll(".slide").forEach((e,i)=>{e.classList.toggle("on",i===ai);e.setAttribute("aria-hidden",i!==ai)});
     document.querySelectorAll("#adDots button").forEach((e,i)=>e.classList.toggle("on",i===ai));
-    bar.style.animation="none";void bar.offsetWidth;bar.style.animation="";
+    bar.style.animation="none";void bar.offsetWidth;bar.style.animation="";bar.style.animationDuration=(window.AD_SECS||6)+"s";
   };
   bar.addEventListener("animationend",()=>goAd(ai+1));
   $("#adPrev").onclick=()=>goAd(ai-1);$("#adNext").onclick=()=>goAd(ai+1);
@@ -739,7 +851,7 @@ const FIREBASE_CONFIG={
   let cur="auth";
   const say=(m,ok)=>{const e=$("#aerr");e.textContent=m;e.className="aerr on"+(ok?" aok":"")};
   const clear=()=>{$("#aerr").className="aerr"};
-  function view(v){cur=v;$("#amAuth").hidden=v!=="auth";$("#amAcct").hidden=v!=="acct"}
+  function view(v){cur=v;$("#amAuth").hidden=v!=="auth";$("#amAcct").hidden=v!=="acct";document.querySelector("#am .am-card").classList.toggle("wide",v==="acct")}
   const MSG={
    "auth/invalid-credential":"Wrong email or password.","auth/wrong-password":"Wrong email or password.","auth/user-not-found":"No account with this email. Register first.",
    "auth/email-already-in-use":"This email is already registered. Log in instead.","auth/weak-password":"Password must be at least 6 characters.",
@@ -809,6 +921,10 @@ const FIREBASE_CONFIG={
   $("#verSend").onclick=async()=>{try{await fb.A.sendEmailVerification(fb.auth.currentUser);toast("Verification email sent. Check inbox and spam.")}catch(e){toast(MSG[e.code]||e.message||"Could not send email.")}};
   $("#verRefresh").onclick=async()=>{try{const u=fb.auth.currentUser;await u.reload();await u.getIdToken(true);user=fb.auth.currentUser;paint();toast(user.emailVerified?"Email verified":"Not verified yet. Open the link in the email first.")}catch(e){toast(e.message||"Could not refresh.")}};
   $("#logout").onclick=async()=>{if(fb){await fb.A.signOut(fb.auth)}close()};
+  window.NiurooAuth={
+    async setName(n){if(!fb)throw new Error("Not connected");await fb.A.updateProfile(fb.auth.currentUser,{displayName:n});user=fb.auth.currentUser;paint()},
+    reset(e){if(!fb)throw new Error("Not connected");return fb.A.sendPasswordResetEmail(fb.auth,e)}
+  };
   init();
 })();
 </script>
@@ -819,9 +935,10 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
 (()=>{
   const $=s=>document.querySelector(s);
   const esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  let db=null,F=null,me=null,STORE={},isAdmin=false,seeded=false,editing=null,tab="games",pImg="",pQR="";
+  let db=null,F=null,me=null,STORE={},isAdmin=false,seeded=false,adsSeeded=false,adEdit=null,editing=null,tab="games",pImg="",pQR="";
   const DEFAULTS=GAMES.map((g,i)=>({...g,stock:STOCK[i]||10,order:i}));
   GAMES=DEFAULTS;
+  const DEFAULT_ADS=ADS.map((a,i)=>({...a,aid:"ad"+i,order:i,active:true}));ADS=DEFAULT_ADS;
   const okImg=u=>!u||/^(https:\/\/[^\s'"()]+|data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+)$/.test(u);
   const fire=e=>e&&e.code==="permission-denied"?"Permission denied. Paste the Firestore rules and put your verified email in them.":(e&&e.message)||"Something went wrong.";
   const toData=(file,max)=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);const u=c.toDataURL("image/jpeg",.82);u.length>700000?rej():res(u)};im.onerror=rej;im.src=r.result};r.onerror=rej;r.readAsDataURL(file)});
@@ -839,9 +956,10 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     try{
       const base="https://www.gstatic.com/firebasejs/10.12.2/";
       const [{initializeApp},f]=await Promise.all([import(base+"firebase-app.js"),import(base+"firebase-firestore.js")]);
-      F=f;db=f.getFirestore(initializeApp(FIREBASE_CONFIG));
+      F=f;db=f.getFirestore(initializeApp(FIREBASE_CONFIG));ensure();
       f.onSnapshot(f.collection(db,"games"),snap=>{seeded=!snap.empty;GAMES=snap.empty?DEFAULTS:snap.docs.map(d=>d.data()).sort((a,b)=>(a.order??0)-(b.order??0)||a.id-b.id);refresh()},e=>console.error(e));
-      f.onSnapshot(f.doc(db,"settings","store"),d=>{STORE=d.exists()?d.data():{}},()=>{});
+      f.onSnapshot(f.doc(db,"settings","store"),d=>{STORE=d.exists()?d.data():{};window.AD_SECS=STORE.adSecs||6},()=>{});
+      f.onSnapshot(f.collection(db,"ads"),snap=>{adsSeeded=!snap.empty;ADS=snap.empty?DEFAULT_ADS:snap.docs.map(d=>d.data()).sort((a,b)=>(a.order??0)-(b.order??0));if(window.paintAds)paintAds();if($("#dm").classList.contains("open")&&tab==="ads"&&!adEdit)renderDash()},e=>console.error(e));
     }catch(e){console.error(e)}
   }
   addEventListener("niuroo-auth",e=>{
@@ -849,6 +967,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     isAdmin=!!(me&&me.emailVerified&&ADMIN_EMAILS.some(x=>x.toLowerCase()===(me.email||"").toLowerCase()));
     $("#dashBtn").hidden=!isAdmin;$("#dashLink").hidden=!isAdmin;
     if(!isAdmin)$("#dm").classList.remove("open");
+    ensure();if(!me)leaveThread();
   });
 
   /* ---------- dashboard ---------- */
@@ -857,6 +976,8 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     document.querySelectorAll(".dm-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.dt===tab));
     const B=$("#dmBody");
     if(tab==="games")return editing?gameForm(B):gameList(B);
+    if(tab==="ads")return adEdit?adForm(B):adList(B);
+    if(tab==="tickets")return adminTickets(B);
     if(tab==="checkout")return checkoutForm(B);
     return ordersView(B);
   }
@@ -908,7 +1029,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     const upi=v("s-upi"),contact=v("s-contact");
     if(upi&&!/^[\w.\-]{2,}@[A-Za-z]{2,}$/.test(upi))return err("#cerr","UPI ID looks wrong. Example: name@okaxis");
     if(contact&&!/^https:\/\/[^\s'"<>]+$/.test(contact))return err("#cerr","Contact link must start with https://");
-    try{await F.setDoc(F.doc(db,"settings","store"),{upi,upiName:v("s-name"),contact,note:v("s-note"),qr:pQR||""});toast("Checkout settings saved")}catch(x){err("#cerr",fire(x))}
+    try{await F.setDoc(F.doc(db,"settings","store"),{upi,upiName:v("s-name"),contact,note:v("s-note"),qr:pQR||""},{merge:true});toast("Checkout settings saved")}catch(x){err("#cerr",fire(x))}
   }
   const STAT=["pending","paid","delivered","rejected"];
   async function ordersView(B){
@@ -919,12 +1040,49 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     }catch(x){B.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
   }
 
+  /* ---------- ads tab ---------- */
+  async function seedAds(){const b=F.writeBatch(db);DEFAULT_ADS.forEach(a=>b.set(F.doc(db,"ads",a.aid),a));await b.commit()}
+  function adList(B){
+    B.innerHTML=`<div class="dm-bar"><button class="btn btn-primary btn-sm" data-act="anew"><i class="fa-solid fa-plus"></i> Add ad</button>${adsSeeded?"":`<button class="btn btn-ghost btn-sm" data-act="aseed">Save default ads to database</button>`}</div>
+    <form class="af" id="sf" novalidate><div class="two"><label>Seconds per slide<input id="a-secs" type="number" min="3" max="30" value="${window.AD_SECS||6}"></label><button class="btn btn-ghost" type="submit" style="align-self:end;height:46px">Save speed</button></div><div class="aerr" id="serr"></div></form>`
+    +ADS.map(a=>{const g=GAMES.find(x=>x.id===a.id);return `<div class="dm-row"><div class="th" style="background:${g?grad(g):"#333"}"></div><div class="t"><b>${esc(g?g.name:"(game deleted)")}</b><small>${esc(a.badge)} · position ${(a.order??0)+1} · ${a.active===false?"hidden":"showing"}</small></div><button class="btn btn-ghost btn-sm" data-act="aedit" data-aid="${esc(a.aid)}">Edit</button><button class="btn btn-ghost btn-sm" data-act="adel" data-aid="${esc(a.aid)}">Delete</button></div>`}).join("");
+  }
+  function adForm(B){
+    const a=adEdit==="new"?{id:GAMES[0]&&GAMES[0].id,badge:"Limited offer",accent:"Instant key delivery",text:"",order:ADS.length,active:true}:ADS.find(x=>x.aid===adEdit);
+    if(!a){adEdit=null;return adList(B)}
+    B.innerHTML=`<button class="back" type="button" data-act="acancel"><i class="fa-solid fa-arrow-left"></i> Back to ads</button>
+    <form class="af" id="adf" novalidate>
+      <label>Game (price and poster come from this game)<select id="a-game">${GAMES.map(g=>`<option value="${g.id}" ${g.id===a.id?"selected":""}>${esc(g.name)}</option>`).join("")}</select></label>
+      <label>Badge text<input id="a-badge" value="${esc(a.badge)}" maxlength="40"></label>
+      <label>Accent line<input id="a-acc" value="${esc(a.accent)}" maxlength="60"></label>
+      <label>Description<input id="a-text" value="${esc(a.text)}" maxlength="200"></label>
+      <div class="two"><label>Position (1 = first)<input id="a-pos" type="number" min="1" value="${(a.order??0)+1}"></label><label>Show in slider<select id="a-act"><option value="1" ${a.active!==false?"selected":""}>Yes</option><option value="0" ${a.active===false?"selected":""}>No</option></select></label></div>
+      <div class="aerr" id="aerr2"></div><button class="btn btn-primary btn-lg btn-block" type="submit">Save ad</button>
+    </form>`;
+  }
+  async function saveAd(e){
+    e.preventDefault();const v=id=>$("#"+id).value.trim(),gid=+v("a-game");
+    if(!gid)return err("#aerr2","Add a game first.");
+    const aid=adEdit==="new"?String(Date.now()):adEdit;
+    const data={aid,id:gid,badge:v("a-badge").slice(0,40),accent:v("a-acc").slice(0,60),text:v("a-text").slice(0,200),order:Math.max(0,(parseInt(v("a-pos"))||1)-1),active:v("a-act")==="1"};
+    try{if(!adsSeeded)await seedAds();await F.setDoc(F.doc(db,"ads",aid),data);adEdit=null;toast("Ad saved");renderDash()}catch(x){err("#aerr2",fire(x))}
+  }
+  async function saveSpeed(e){
+    e.preventDefault();const n=Math.min(30,Math.max(3,parseInt($("#a-secs").value)||6));
+    try{await F.setDoc(F.doc(db,"settings","store"),{adSecs:n},{merge:true});toast("Speed saved: "+n+"s per slide")}catch(x){err("#serr",fire(x))}
+  }
+
   document.addEventListener("click",async e=>{
     if(e.target.closest("[data-open-dash]")){e.preventDefault();if(!isAdmin)return;document.getElementById("drawer").classList.remove("open");tab="games";editing=null;$("#dm").classList.add("open");renderDash();return}
     const t=e.target.closest("[data-act],[data-dt]");if(!t)return;
-    if(t.dataset.dt){tab=t.dataset.dt;editing=null;renderDash();return}
+    if(t.dataset.dt){leaveThread("admin");tab=t.dataset.dt;editing=null;adEdit=null;renderDash();return}
     const a=t.dataset.act,id=+t.dataset.id;
     if(a==="new"){editing="new";renderDash()}
+    if(a==="anew"){adEdit="new";renderDash()}
+    if(a==="aedit"){adEdit=t.dataset.aid;renderDash()}
+    if(a==="acancel"){adEdit=null;renderDash()}
+    if(a==="aseed"){try{await seedAds();toast("Default ads saved")}catch(x){toast(fire(x))}}
+    if(a==="adel"&&confirm("Delete this ad?")){try{if(!adsSeeded)await seedAds();await F.deleteDoc(F.doc(db,"ads",t.dataset.aid));toast("Ad deleted")}catch(x){toast(fire(x))}}
     if(a==="edit"){editing=id;renderDash()}
     if(a==="cancel"){editing=null;renderDash()}
     if(a==="reload")renderDash();
@@ -932,7 +1090,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     if(a==="del"&&confirm("Delete this game?")){try{await F.deleteDoc(F.doc(db,"games",String(id)));toast("Deleted")}catch(x){toast(fire(x))}}
     if(a==="osave"){const k=t.dataset.id;try{await F.updateDoc(F.doc(db,"orders",k),{status:document.querySelector(`[data-os="${k}"]`).value,delivery:document.querySelector(`[data-od="${k}"]`).value.trim().slice(0,500)});toast("Order updated")}catch(x){toast(fire(x))}}
   });
-  document.addEventListener("submit",e=>{if(e.target.id==="gf")saveGame(e);if(e.target.id==="cf")saveCheckout(e)});
+  document.addEventListener("submit",e=>{if(e.target.id==="gf")saveGame(e);if(e.target.id==="cf")saveCheckout(e);if(e.target.id==="adf")saveAd(e);if(e.target.id==="sf")saveSpeed(e)});
   document.addEventListener("change",async e=>{
     const f=e.target;if(f.id!=="f-file"&&f.id!=="q-file")return;const file=f.files[0];if(!file)return;
     try{const u=await toData(file,f.id==="f-file"?800:520);f.id==="f-file"?pImg=u:pQR=u;toast("Image ready. Press Save.")}catch(x){toast("Image too big or unreadable. Try a smaller one.")}
@@ -968,8 +1126,208 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
       }catch(x){err("#oerr",fire(x))}
     };
   }
+  /* ---------- account menu, profile and tickets ---------- */
+  let unMy=null,unAll=null,MY=[],ALL=[],PROFILE={},orderCount=null,thread=null,tkF="open",acTab="account";
+  const when=t=>{try{return t&&t.toDate?t.toDate().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}):"just now"}catch(x){return ""}};
+  const fmtD=t=>t?new Date(t).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}):"-";
+  const dd=d=>d.data({serverTimestamps:"estimate"});
+  const mk=d=>({id:d.id,...dd(d)});
+  const tms=t=>t.updated&&t.updated.toMillis?t.updated.toMillis():0;
+  const pill=s=>`<span class="pill-st st-${s}">${s}</span>`;
+  const row=(t,scope)=>`<div class="dm-row tkrow" data-tk="${t.id}" data-tkscope="${scope}" role="button" tabindex="0"><div class="t"><b>${esc(t.subject)}</b><small>${scope==="admin"?esc(t.email||t.name||"")+" · ":""}${esc(t.lastMsg||"")} · ${when(t.updated)}</small></div>${scope==="admin"&&t.status==="open"&&t.lastBy==="user"?`<span class="pill-st st-open">needs reply</span>`:pill(t.status)}</div>`;
+
+  function ensure(){
+    if(!F||!db)return;
+    if(!me){if(unMy)unMy();if(unAll)unAll();unMy=unAll=null;MY=[];ALL=[];PROFILE={};orderCount=null;return}
+    if(!unMy){
+      unMy=F.onSnapshot(F.query(F.collection(db,"tickets"),F.where("uid","==",me.uid)),s=>{MY=s.docs.map(mk).sort((a,b)=>tms(b)-tms(a));if(acTab==="tickets"&&!thread)myPane();paintDetails()},e=>console.error(e));
+      F.getDoc(F.doc(db,"users",me.uid)).then(d=>{PROFILE=d.exists()?d.data():{};paintDetails();if(acTab==="edit")editPane()}).catch(()=>{});
+      F.getDocs(F.query(F.collection(db,"orders"),F.where("uid","==",me.uid))).then(s=>{orderCount=s.size;paintDetails()}).catch(()=>{orderCount="-";paintDetails()});
+    }
+    if(isAdmin&&!unAll){
+      unAll=F.onSnapshot(F.collection(db,"tickets"),s=>{
+        ALL=s.docs.map(mk).sort((a,b)=>tms(b)-tms(a));
+        const n=ALL.filter(t=>t.status==="open"&&t.lastBy==="user").length;$("#tkBadge").textContent=n?" "+n:"";
+        if($("#dm").classList.contains("open")&&tab==="tickets"&&!(thread&&thread.scope==="admin"))adminTickets($("#dmBody"));
+      },e=>console.error(e));
+    }
+  }
+  function adminTickets(B){
+    const L=ALL.filter(t=>tkF==="all"||t.status===tkF);
+    B.innerHTML=`<div class="dm-bar">${["open","closed","all"].map(f=>`<button class="btn ${tkF===f?"btn-primary":"btn-ghost"} btn-sm" data-tkf="${f}">${f[0].toUpperCase()+f.slice(1)}</button>`).join("")}</div>`+(L.length?L.map(t=>row(t,"admin")).join(""):`<p class="muted">No ${tkF==="all"?"":tkF+" "}tickets.</p>`);
+  }
+  function leaveThread(scope){if(thread&&(!scope||thread.scope===scope)){thread.un.forEach(u=>u());thread=null}}
+  function openThread(el,id,scope,onBack){
+    leaveThread();const un=[];thread={id,scope,un,onBack};
+    el.innerHTML=`<button class="back" type="button" data-tkback><i class="fa-solid fa-arrow-left"></i> Back</button><div class="tk-head"></div><div class="tk-msgs" aria-live="polite"></div><form class="af tk-send" novalidate><textarea maxlength="1000" rows="2" placeholder="Write a message"></textarea><div class="aerr tk-err"></div><button class="btn btn-primary btn-block" type="submit">Send</button></form>`;
+    const H=el.querySelector(".tk-head"),M=el.querySelector(".tk-msgs"),Fm=el.querySelector(".tk-send");
+    let t=null,extra="";
+    const head=()=>{if(!t)return;H.innerHTML=`<div class="dm-bar" style="justify-content:space-between;align-items:center"><b>${esc(t.subject)}</b>${pill(t.status)}</div>${scope==="admin"?`<p class="muted" style="font-size:.84rem">${esc(t.name||"")} · ${esc(t.email||"")}${extra}</p>`:""}<div class="dm-bar">${t.status==="open"?`<button class="btn btn-ghost btn-sm" type="button" data-tkclose>Close ticket</button>`:(scope==="admin"?`<button class="btn btn-ghost btn-sm" type="button" data-tkopen>Reopen</button>`:"")}${t.status==="closed"?`<span class="muted" style="font-size:.84rem">Closed${t.closedBy?" by "+esc(t.closedBy):""}.</span>`:""}</div>`;Fm.hidden=t.status!=="open"};
+    un.push(F.onSnapshot(F.doc(db,"tickets",id),d=>{const first=!t;t=d.exists()?mk(d):null;if(!t){M.textContent="Ticket not found.";return}head();
+      if(first&&scope==="admin")F.getDoc(F.doc(db,"users",t.uid)).then(u=>{if(u.exists()){const p=u.data();extra=(p.phone?" · "+esc(p.phone):"")+(p.contact?" · "+esc(p.contact):"");head()}}).catch(()=>{})},e=>{M.textContent=fire(e)}));
+    un.push(F.onSnapshot(F.query(F.collection(db,"tickets",id,"messages"),F.orderBy("created","asc")),s=>{
+      M.innerHTML=s.docs.map(d=>{const m=dd(d);return `<div class="bub ${m.role==="admin"?"admin":""}">${esc(m.text)}<small>${esc(m.role==="admin"?"Support":(m.name||"Customer"))} · ${when(m.created)}</small></div>`}).join("")||"<p class='muted'>No messages yet.</p>";M.scrollTop=M.scrollHeight},e=>{M.textContent=fire(e)}));
+    Fm.onsubmit=async e=>{
+      e.preventDefault();const ta=Fm.querySelector("textarea"),txt=ta.value.trim(),er=Fm.querySelector(".tk-err");if(!txt)return;er.className="aerr tk-err";
+      const role=scope==="admin"?"admin":"user";
+      try{const b=F.writeBatch(db);
+        b.set(F.doc(F.collection(db,"tickets",id,"messages")),{uid:me.uid,role,name:me.displayName||me.email||"Customer",text:txt,created:F.serverTimestamp()});
+        b.update(F.doc(db,"tickets",id),{updated:F.serverTimestamp(),lastBy:role,lastMsg:txt.slice(0,100)});
+        await b.commit();ta.value=""}catch(x){er.textContent=fire(x);er.className="aerr tk-err on"}
+    };
+  }
+  function myPane(){
+    const P=$("#acPane-tickets");
+    if(!P.querySelector("#ntf"))P.innerHTML=`<form class="af" id="ntf" novalidate><b>Create a ticket</b><label>Subject<input id="nt-sub" maxlength="80" placeholder="Order not delivered"></label><label>Message<textarea id="nt-msg" maxlength="1000" rows="3" placeholder="Describe your problem"></textarea></label><div class="aerr" id="nterr"></div><button class="btn btn-primary btn-block" type="submit">Submit ticket</button></form><h4 class="hist">Ticket history</h4><div id="tkHist" class="dm-body" style="padding:0"></div>`;
+    $("#tkHist").innerHTML=MY.length?MY.map(t=>row(t,"user")).join(""):`<p class="muted">No tickets yet.</p>`;
+  }
+  function paintDetails(){
+    const D=$("#acDetails");if(!D||!me)return;
+    const prov=(me.providerData||[]).map(p=>p.providerId==="google.com"?"Google":p.providerId==="password"?"Email and password":p.providerId).join(", ");
+    const r=(k,v)=>`<div><span>${k}</span><b>${v}</b></div>`,md=me.metadata||{};
+    D.innerHTML=r("Name",esc(me.displayName||PROFILE.name||"-"))+r("Email",esc(me.email||"-")+(me.email?(me.emailVerified?" (verified)":" (not verified)"):""))+r("Phone",esc(PROFILE.phone||me.phoneNumber||"-"))+r("Discord / WhatsApp",esc(PROFILE.contact||"-"))+r("Sign-in method",esc(prov||"-"))+r("Member since",esc(fmtD(md.creationTime)))+r("Last login",esc(fmtD(md.lastSignInTime)))+r("Orders",orderCount==null?"...":esc(orderCount))+r("Tickets",MY.length+" total, "+MY.filter(t=>t.status==="open").length+" open");
+  }
+  function editPane(){
+    if(!me)return;const P=$("#acPane-edit"),pw=(me.providerData||[]).some(p=>p.providerId==="password");
+    P.innerHTML=`<form class="af" id="epf" novalidate><label>Name<input id="e-name" maxlength="50" value="${esc(me.displayName||PROFILE.name||"")}"></label><label>Email<input value="${esc(me.email||"")}" disabled></label><label>Phone<input id="e-phone" type="tel" maxlength="20" value="${esc(PROFILE.phone||"")}" placeholder="+91 98765 43210"></label><label>Discord or WhatsApp<input id="e-contact" maxlength="40" value="${esc(PROFILE.contact||"")}" placeholder="username or number"></label><div class="aerr" id="eerr"></div><button class="btn btn-primary btn-block" type="submit">Save profile</button>${pw?`<button class="btn btn-ghost btn-block" type="button" id="pwreset">Send password reset email</button>`:""}</form>`;
+  }
+  function setAcTab(t){
+    if(t!=="tickets"&&thread&&thread.scope==="user")leaveThread();
+    acTab=t;document.querySelectorAll(".actabs button").forEach(b=>b.classList.toggle("on",b.dataset.ac===t));
+    ["account","tickets","edit"].forEach(k=>$("#acPane-"+k).hidden=k!==t);
+    if(t==="account")paintDetails();if(t==="tickets"&&!thread)myPane();if(t==="edit")editPane();
+  }
+  document.addEventListener("click",async e=>{
+    const c=e.target;let x;
+    if(c.closest("[data-open-auth]")&&me){setAcTab("account");return}
+    if(x=c.closest("[data-ac]")){setAcTab(x.dataset.ac);return}
+    if(x=c.closest("[data-tkback]")){const cb=thread&&thread.onBack;leaveThread();if(cb)cb();return}
+    if(x=c.closest("[data-tkclose],[data-tkopen]")){
+      if(!thread)return;const admin=thread.scope==="admin",reopen=x.hasAttribute("data-tkopen");
+      try{await F.updateDoc(F.doc(db,"tickets",thread.id),reopen?{status:"open",updated:F.serverTimestamp(),lastBy:"admin",lastMsg:"Ticket reopened",closedBy:F.deleteField()}:{status:"closed",updated:F.serverTimestamp(),lastBy:admin?"admin":"user",lastMsg:"Ticket closed",closedBy:admin?"support":"customer"});toast(reopen?"Ticket reopened":"Ticket closed")}catch(y){toast(fire(y))}
+      return}
+    if(x=c.closest("[data-tk]")){const sc=x.dataset.tkscope;openThread(sc==="admin"?$("#dmBody"):$("#acPane-tickets"),x.dataset.tk,sc,sc==="admin"?()=>adminTickets($("#dmBody")):()=>{$("#acPane-tickets").innerHTML="";myPane()});return}
+    if(x=c.closest("[data-tkf]")){tkF=x.dataset.tkf;adminTickets($("#dmBody"));return}
+    if(c.id==="pwreset"){try{await NiurooAuth.reset(me.email);toast("Password reset email sent")}catch(y){toast(y.message||"Could not send email")}}
+  });
+  document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches("[data-tk]")){e.preventDefault();e.target.click()}});
+  document.addEventListener("submit",async e=>{
+    if(e.target.id==="ntf"){
+      e.preventDefault();const sub=$("#nt-sub").value.trim(),msg=$("#nt-msg").value.trim();
+      if(sub.length<3)return err("#nterr","Enter a subject.");if(msg.length<5)return err("#nterr","Describe your problem.");
+      if(!db||!me)return err("#nterr","Not connected. Refresh and try again.");
+      try{const tr=F.doc(F.collection(db,"tickets")),b=F.writeBatch(db);
+        b.set(tr,{uid:me.uid,email:me.email||"",name:me.displayName||"",subject:sub,status:"open",created:F.serverTimestamp(),updated:F.serverTimestamp(),lastBy:"user",lastMsg:msg.slice(0,100)});
+        b.set(F.doc(F.collection(db,"tickets",tr.id,"messages")),{uid:me.uid,role:"user",name:me.displayName||me.email||"Customer",text:msg,created:F.serverTimestamp()});
+        await b.commit();toast("Ticket created");$("#nt-sub").value="";$("#nt-msg").value="";$("#nterr").className="aerr"}catch(x){err("#nterr",fire(x))}
+    }
+    if(e.target.id==="epf"){
+      e.preventDefault();const name=$("#e-name").value.trim(),phone=$("#e-phone").value.trim(),contact=$("#e-contact").value.trim();
+      if(name.length<2)return err("#eerr","Enter your name.");
+      if(phone&&!/^[+\d][\d\s\-]{6,18}$/.test(phone))return err("#eerr","Phone number looks wrong.");
+      if(!db||!window.NiurooAuth)return err("#eerr","Not connected. Refresh and try again.");
+      try{await NiurooAuth.setName(name);await F.setDoc(F.doc(db,"users",me.uid),{name,phone,contact,email:me.email||"",updated:F.serverTimestamp()},{merge:true});PROFILE={...PROFILE,name,phone,contact};toast("Profile saved");$("#eerr").className="aerr";paintDetails()}catch(x){err("#eerr",fire(x))}
+    }
+  });
+
+
+  /* ---------- user pages (full screen) ---------- */
+  let UO=null,upPage="dash";
+  const cms=t=>t&&t.toMillis?t.toMillis():Date.now();
+  const TIERS=[["Bronze",0],["Silver",1000],["Gold",2000],["Diamond",4000],["Platinum",10000]];
+  const TILES=[["orders","box","My orders","Payment and delivery history"],["library","gamepad","My library","Purchased games and keys"],["rewards","gift","Rewards","Points, level and tiers"],["notifs","bell","Notifications","Delivery and support updates"],["tickets","life-ring","Support tickets","Get help with an order"],["settings","gear","Account settings","Profile and security"]];
+  const oCard=o=>`<div class="dm-row" style="flex-wrap:wrap"><div class="t" style="flex:1 1 240px"><b>${money(+o.total||0)}</b><small>${(o.items||[]).map(i=>esc(i.q)+"× "+esc(i.name)).join(", ")}</small><small>${when(o.created)} · Order ${esc(o.id.slice(0,8))} · UTR ${esc(o.txn||"-")}</small></div><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span>${o.delivery?`<div class="od-key"><span>Your key / delivery details</span><code>${esc(o.delivery)}</code><button class="btn btn-ghost btn-sm" type="button" data-ud="copy" data-v="${esc(o.delivery)}">Copy</button></div>`:""}</div>`;
+  const park=()=>{const h=$("#amAcct");["account","tickets","edit"].forEach(k=>h.appendChild($("#acPane-"+k)))};
+  function upStats(){
+    const L=UO||[],ok=L.filter(o=>o.status==="paid"||o.status==="delivered"),pts=Math.floor(ok.reduce((a,o)=>a+(+o.total||0),0)),own=new Set();
+    L.filter(o=>o.status==="delivered").forEach(o=>(o.items||[]).forEach(i=>own.add(i.name)));
+    let tier=TIERS[0],next=null;TIERS.forEach(t=>{if(pts>=t[1])tier=t});next=TIERS.find(t=>t[1]>pts);
+    return{pts,tier,next,owned:own.size,orders:L.length}
+  }
+  function upPaint(){
+    const B=$("#upBody");if(!B||!me)return;
+    const pg=upPage,T=TILES.find(t=>t[0]===pg);park();
+    const back=pg==="dash"?`<button class="btn btn-ghost btn-sm up-back" type="button" data-up-close><i class="fa-solid fa-chevron-left"></i> Back to Store</button>`:`<button class="btn btn-ghost btn-sm up-back" type="button" data-up="dash"><i class="fa-solid fa-chevron-left"></i> Back to dashboard</button>`;
+    const head=T?`<div><span class="eyebrow">Customer dashboard</span><h2>${T[2]}</h2><p class="muted">${T[3]}</p></div>`:"";
+    if(pg==="tickets"||pg==="settings"){
+      B.innerHTML=back+head+`<div class="up-box" id="upHost"></div>`;
+      if(pg==="tickets"){setAcTab("tickets");$("#upHost").appendChild($("#acPane-tickets"))}
+      else{setAcTab("account");setAcTab("edit");["account","edit"].forEach(k=>{const e=$("#acPane-"+k);e.hidden=false;$("#upHost").appendChild(e)})}
+      return}
+    if(!UO){B.innerHTML=back+`<p class="muted">Loading your account…</p>`;return}
+    if(UO.err){B.innerHTML=back+`<div class="aerr on">${esc(UO.err)}</div>`;return}
+    const S=upStats(),nm=(me.displayName||PROFILE.name||"there").trim(),sp=nm.indexOf(" ");
+    let body="";
+    if(pg==="orders")body=UO.length?UO.map(oCard).join(""):`<p class="muted">You have no orders yet.</p>`;
+    else if(pg==="library"){const d=UO.filter(o=>o.status==="delivered");body=d.length?d.map(oCard).join(""):`<p class="muted">Delivered purchases appear here with your key or account details.</p>`}
+    else if(pg==="rewards")body=`<div class="up-box"><b>${S.tier[0]}</b> · ${S.pts.toLocaleString("en-IN")} pts${S.next?` · ${(S.next[1]-S.pts).toLocaleString("en-IN")} to ${S.next[0]}`:""}<div class="up-bar"><i style="width:${Math.min(100,S.pts/100)}%"></i></div><div class="up-tiers">${TIERS.map(t=>`<span>${t[0]} (${t[1]>=1000?t[1]/1000+"K":t[1]})</span>`).join("")}</div></div><p class="muted">You earn 1 point for every ₹1 spent on paid or delivered orders.</p>`;
+    else if(pg==="notifs"){
+      const N=UO.map(o=>({t:cms(o.created),i:o.status==="delivered"?"circle-check":o.status==="rejected"?"circle-xmark":"clock",x:`Order ${o.id.slice(0,8)} (${money(+o.total||0)}): ${({pending:"waiting for payment verification",paid:"payment confirmed, delivery soon",delivered:"delivered, see My library",rejected:"rejected, contact support"})[o.status]||esc(o.status)}`}));
+      MY.forEach(t=>{if(t.lastBy==="admin")N.push({t:tms(t),i:"life-ring",x:`Support replied on "${esc(t.subject)}"`})});
+      N.sort((a,b)=>b.t-a.t);body=N.length?N.map(n=>`<div class="dm-row"><i class="fa-solid fa-${n.i}" style="width:22px;text-align:center;color:rgb(var(--accent))"></i><div class="t"><b style="font-weight:600">${n.x}</b><small>${new Date(n.t).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"})}</small></div></div>`).join(""):`<p class="muted">No notifications yet.</p>`}
+    else{
+      let welcome="";try{welcome=localStorage.getItem("nu-welcome")?"":`<div class="up-warn"><div><b>Welcome to your account</b><p class="muted" style="font-size:.9rem">Start with My orders after checkout. Delivered purchases appear in My library with your key.</p></div><button class="icon-btn" type="button" data-upx="welcome" aria-label="Dismiss"><i class="fa-solid fa-xmark"></i></button></div>`}catch(y){}
+      const q=[["shop","bag-shopping","Continue shopping"],["orders","box","Track orders"],["library","gamepad","My library"],["rewards","gift","Redeem rewards"],["tickets","life-ring","Support"]];
+      B.innerHTML=back+`<section class="up-hero"><div><span class="eyebrow">Customer dashboard</span><h1>Hi, ${esc(sp>0?nm.slice(0,sp):nm)}${sp>0?` <span class="tgrad">${esc(nm.slice(sp+1))}</span>`:""}</h1><p class="muted">Your games, orders, rewards and support in one secure place.</p></div><div class="up-me">${$("#avWrap").innerHTML}<div><b>${esc(me.email||me.phoneNumber||"")}</b><a href="#" data-up="settings"><i class="fa-solid fa-gear"></i> Account settings</a></div></div></section>${welcome}
+      <div class="up-box"><b>RANK PROGRESSION</b><p class="muted">Current tier: <b style="color:rgb(var(--accent))">${S.tier[0].toUpperCase()}</b> · ${S.pts.toLocaleString("en-IN")} / 10,000 pts</p><div class="up-bar"><i style="width:${Math.min(100,S.pts/100)}%"></i></div></div>
+      <p class="up-h">Quick actions</p><div class="up-grid">${q.map(a=>`<button class="up-tile" type="button" data-up="${a[0]}"><i class="fa-solid fa-${a[1]}"></i><b>${a[2]}</b></button>`).join("")}</div>
+      <div class="up-grid">${[[S.orders,"Orders","box"],[S.owned,"Games owned","gamepad"],[S.pts,"Reward points","gift"],[S.tier[0],"Level","ticket"]].map(a=>`<div class="up-tile"><i class="fa-solid fa-${a[2]}"></i><b style="font-size:1.8rem;font-family:var(--font-display)">${a[0]}</b><small style="text-transform:uppercase;letter-spacing:.06em">${a[1]}</small></div>`).join("")}</div>
+      <p class="up-h">Account center</p><div class="up-grid">${TILES.map(t=>`<button class="up-tile" type="button" data-up="${t[0]}"><i class="fa-solid fa-${t[1]}"></i><b>${t[2]}</b><small>${t[3]}</small></button>`).join("")}</div>`;return}
+    B.innerHTML=back+head+body;
+  }
+  async function udLoad(){
+    try{const s=await F.getDocs(F.query(F.collection(db,"orders"),F.where("uid","==",me.uid)));UO=s.docs.map(mk).sort((a,b)=>cms(b.created)-cms(a.created))}catch(x){UO={err:fire(x)}}
+    if($("#up").classList.contains("open")&&upPage!=="tickets"&&upPage!=="settings")upPaint();
+  }
+  window.openUserPage=pg=>{if(!me||!db)return toast("Log in first");upPage=pg||"dash";$("#up").classList.add("open");document.body.style.overflow="hidden";$("#up").scrollTop=0;upPaint();udLoad()};
+  function upClose(){park();leaveThread("user");$("#up").classList.remove("open");document.body.style.overflow=""}
+  addEventListener("niuroo-auth",e=>{if(!e.detail){UO=null;upClose()}});
+  document.addEventListener("click",e=>{
+    const c=e.target;let x;
+    if(c.closest("[data-up-close]")){upClose();return}
+    if(x=c.closest("[data-up]")){e.preventDefault();if(x.dataset.up==="shop"){upClose();const g=document.getElementById("games");if(g)g.scrollIntoView({behavior:"smooth"});return}upPage=x.dataset.up;upPaint();$("#up").scrollTop=0;return}
+    if(c.closest("[data-upx=welcome]")){try{localStorage.setItem("nu-welcome","1")}catch(y){}upPaint();return}
+    if(x=c.closest("[data-ud=copy]")){try{navigator.clipboard.writeText(x.dataset.v);toast("Copied")}catch(y){toast("Copy failed")}}
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#up").classList.contains("open")&&!$("#um").hidden===false)upClose()});
+
   $("#checkout").onclick=openCheckout;
   init();
+})();
+</script>
+<script>
+/* user dropdown: opens when the name button is clicked while logged in */
+(function(){
+  const $=s=>document.querySelector(s),btn=$("#authBtn"),um=$("#um");
+  const loggedIn=()=>!$("#amAcct").hidden;
+  const sync=()=>{document.body.classList.toggle("u-in",loggedIn());if(!loggedIn())hide()};
+  function hide(){um.hidden=true;btn.setAttribute("aria-expanded","false")}
+  function show(){
+    $("#umName").textContent=$("#acName").textContent||"Your account";
+    $("#umMail").textContent=$("#acMail").textContent||"";
+    $("#umAdmin").hidden=$("#dashBtn").hidden;
+    um.hidden=false;btn.setAttribute("aria-expanded","true");
+  }
+  new MutationObserver(sync).observe(btn,{childList:true});
+  addEventListener("niuroo-auth",()=>setTimeout(sync,0));
+  sync();
+  /* capture phase: stop the old "open account modal" handler when logged in */
+  document.addEventListener("click",e=>{
+    if(e.target.closest("#authBtn")&&loggedIn()){
+      e.preventDefault();e.stopPropagation();
+      um.hidden?show():hide();return;
+    }
+    if(!um.hidden&&!e.target.closest("#um"))hide();
+  },true);
+  um.addEventListener("click",e=>{
+    const b=e.target.closest("[data-um],[data-open-dash]");if(!b)return;
+    const a=b.dataset.um;hide();
+    if(!a)return;
+    e.stopPropagation();
+    if(a==="logout"){$("#logout").click();return}
+    window.openUserPage&&window.openUserPage(a);
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!um.hidden){hide();btn.focus()}});
 })();
 </script>
 </body>
