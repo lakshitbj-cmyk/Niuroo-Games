@@ -592,6 +592,14 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
 100%{opacity:0;transform:translate(0,-115vh) rotate(-90deg) scale(1)}}
 @keyframes ktRing{0%{opacity:1;transform:scale(.3)}100%{opacity:0;transform:scale(22)}}
 @media(max-width:600px){.kt{width:420px;height:52px;margin:-26px 0 0 -210px}}
+/* ---- notifications ---- */
+.bell-n{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#ff3b5c;color:#fff;font-size:.7rem;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px rgb(var(--bg))}
+.bell-n[hidden]{display:none}
+#bellBtn[hidden]{display:none}
+.nf-card{display:grid;gap:1rem;padding:1.3rem;border-radius:18px;background:linear-gradient(135deg,rgba(var(--accent),.14),rgba(0,0,0,.2));border:1px solid rgba(var(--accent),.28)}
+.nf-card>b{display:flex;align-items:center;gap:.6rem;font-size:1.2rem}.nf-card>b i{color:rgb(var(--accent))}
+.nf-new{border-color:rgba(var(--accent),.55)!important;background:rgba(var(--accent),.1)!important}
+.nf-on{border-color:rgba(var(--pos),.35);background:rgba(var(--pos),.07)}
 </style>
 </head>
 <body>
@@ -606,6 +614,7 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
     <div class="nav-right">
       <button class="btn btn-ghost btn-sm" id="dashBtn" data-open-dash hidden><i class="fa-solid fa-gauge-high"></i> <span class="dtxt">Dashboard</span></button>
       <button class="btn btn-ghost btn-sm" data-open-search><i class="fa-solid fa-magnifying-glass"></i> Find order</button>
+      <button class="icon-btn" id="bellBtn" type="button" aria-label="Notifications" hidden><i class="fa-regular fa-bell"></i><span class="bell-n" id="bellN" hidden></span></button>
       <button class="btn btn-ghost btn-sm" id="authBtn" data-open-auth><i class="fa-regular fa-user"></i> <span id="authLabel">Log in</span></button>
       <button class="icon-btn" id="openCart" aria-label="Open cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="count">0</span></button>
       <button class="icon-btn menu-btn" id="openMenu" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
@@ -782,7 +791,7 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
 <div class="pm" id="rv" role="dialog" aria-modal="true" aria-label="Write a review" hidden><div class="pm-card"><div class="pm-ic"><i class="fa-solid fa-star"></i></div><h3 id="rvT">Write a review</h3><p class="muted" id="rvS"></p><div class="rv-stars" id="rvStars" role="radiogroup" aria-label="Rating"><button type="button" data-rs="1" aria-label="1 star">★</button><button type="button" data-rs="2" aria-label="2 star">★</button><button type="button" data-rs="3" aria-label="3 star">★</button><button type="button" data-rs="4" aria-label="4 star">★</button><button type="button" data-rs="5" aria-label="5 star">★</button></div><div class="af"><textarea id="rvTx" maxlength="400" rows="4" placeholder="Share your experience…"></textarea><div class="aerr" id="rvErr"></div></div><button class="btn btn-primary btn-block" type="button" id="rvGo">Submit review</button><button class="pm-skip" type="button" id="rvSkip">Do it later</button></div></div>
 <div class="dm" id="dm"><div class="dm-card" role="dialog" aria-label="Dashboard">
   <div class="dm-top"><h3>Dashboard</h3><button class="icon-btn" id="closeDm" aria-label="Close dashboard"><i class="fa-solid fa-xmark"></i></button></div>
-  <div class="dm-tabs"><button class="on" data-dt="overview">Overview</button><button data-dt="games">Games</button><button data-dt="ads">Ads</button><button data-dt="tickets">Tickets<span id="tkBadge"></span></button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
+  <div class="dm-tabs"><button class="on" data-dt="overview">Overview</button><button data-dt="games">Games</button><button data-dt="ads">Ads</button><button data-dt="tickets">Tickets<span id="tkBadge"></span></button><button data-dt="notify">Notify</button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
   <div class="dm-body" id="dmBody"></div>
 </div></div>
 <div class="am" id="co"><div class="am-card" id="coBody"></div></div>
@@ -1149,6 +1158,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     if(tab==="games")return editing?gameForm(B):gameList(B);
     if(tab==="ads")return adEdit?adForm(B):adList(B);
     if(tab==="tickets")return adminTickets(B);
+    if(tab==="notify")return notifyView(B);
     if(tab==="checkout")return checkoutForm(B);
     return ordersView(B);
   }
@@ -1202,7 +1212,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     const icon=v("f-icon")||"fa-gamepad";if(!/^fa-[a-z0-9-]+$/.test(icon))return err("#gerr","Icon must look like fa-gamepad.");
     const id=editing==="new"?Date.now():editing,prev=GAMES.find(x=>x.id===id);
     const data={id,name,genre:v("f-genre")||"Other",price,old:parseFloat(v("f-old"))||null,stock:Math.max(0,parseInt(v("f-stock"))||0),d:v("f-d"),img,icon,c:[v("f-c0"),v("f-c1")],order:prev?(prev.order??0):Math.max(-1,...GAMES.map(g=>g.order??0))+1};
-    try{if(!seeded)await seed();await F.setDoc(F.doc(db,"games",String(id)),data);editing=null;toast("Game saved");renderDash()}catch(x){err("#gerr",fire(x))}
+    try{if(!seeded)await seed();await F.setDoc(F.doc(db,"games",String(id)),data);editing=null;toast("Game saved");renderDash();if(!prev&&confirm(`Notify all customers about "${name}"?`))sendNotif({to:"all",title:"New game added",body:`${name} is now available from ₹${price}.`,type:"game"}).then(()=>toast("Customers notified")).catch(x=>toast(fire(x)))}catch(x){err("#gerr",fire(x))}
   }
   function checkoutForm(B){
     pQR=STORE.qr||"";
@@ -1515,7 +1525,11 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     else if(pg==="notifs"){
       const N=UO.map(o=>({t:cms(o.created),i:o.status==="delivered"?"circle-check":o.status==="rejected"?"circle-xmark":"clock",x:`Order ${o.id.slice(0,8)} (${money(+o.total||0)}): ${({pending:"waiting for payment verification",paid:"payment confirmed, delivery soon",delivered:"delivered, see My library",rejected:"rejected, contact support"})[o.status]||esc(o.status)}`}));
       MY.forEach(t=>{if(t.lastBy==="admin")N.push({t:tms(t),i:"life-ring",x:`Support replied on "${esc(t.subject)}"`})});
-      N.sort((a,b)=>b.t-a.t);body=N.length?N.map(n=>`<div class="dm-row"><i class="fa-solid fa-${n.i}" style="width:22px;text-align:center;color:rgb(var(--accent))"></i><div class="t"><b style="font-weight:600">${n.x}</b><small>${new Date(n.t).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"})}</small></div></div>`).join(""):`<p class="muted">No notifications yet.</p>`}
+      nfList().forEach(n=>N.push({t:cms(n.created),i:n.type==="game"?"gamepad":"bullhorn",x:esc(n.title),s:n.body,u:cms(n.created)>SEEN}));
+      const perm="Notification"in window?Notification.permission:"x";
+      const dk=perm==="granted"?`<div class="up-warn nf-on"><div><b>Desktop alerts are on</b><p class="muted" style="font-size:.9rem">New games and messages pop up near your clock, even when the site is in the background.</p></div><button class="btn btn-ghost btn-sm" type="button" data-nftest>Send test</button></div>`:perm==="denied"?`<div class="up-warn"><div><b>Desktop alerts are blocked</b><p class="muted" style="font-size:.9rem">Click the lock icon next to the site address, set Notifications to Allow, then refresh.</p></div></div>`:perm==="default"?`<div class="up-warn"><div><b>Get alerts on your desktop</b><p class="muted" style="font-size:.9rem">Allow notifications to see new games and replies near your clock.</p></div><button class="btn btn-primary btn-sm" type="button" data-nfask>Turn on</button></div>`:"";
+      if(N.some(n=>n.u))setTimeout(markSeen,1500);
+      N.sort((a,b)=>b.t-a.t);body=dk+(N.length?N.map(n=>`<div class="dm-row ${n.u?"nf-new":""}"><i class="fa-solid fa-${n.i}" style="width:22px;text-align:center;color:rgb(var(--accent))"></i><div class="t"><b style="font-weight:600">${n.x}</b>${n.s?`<small>${esc(n.s)}</small>`:""}<small>${new Date(n.t).toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"})}</small></div></div>`).join(""):`<p class="muted">No notifications yet.</p>`)}
     else{
       let welcome="";try{welcome=localStorage.getItem("nu-welcome")?"":`<div class="up-warn"><div><b>Welcome to your account</b><p class="muted" style="font-size:.9rem">Start with My orders after checkout. Delivered purchases appear in My library with your key.</p></div><button class="icon-btn" type="button" data-upx="welcome" aria-label="Dismiss"><i class="fa-solid fa-xmark"></i></button></div>`}catch(y){}
       const q=[["shop","bag-shopping","Continue shopping"],["orders","box","Track orders"],["library","gamepad","My library"],["rewards","gift","Redeem rewards"],["tickets","life-ring","Support"]];
@@ -1572,10 +1586,11 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   }
   function onUser(){
     if(!me)return;
+    if(nfUid!==me.uid){nfUid=me.uid;startNotifs()}
     if(me.email&&!me.emailVerified&&!evDone){evDone=true;$("#evMail").textContent=me.email;show("ev");return}
     if(!$("#ev").hidden)return;checkReview();
   }
-  addEventListener("niuroo-auth",e=>{if(!e.detail){rvQueue=false;evDone=false;hide("ev");hide("rv")}setTimeout(()=>{revPaint();applyImg();let n=0;const t=setInterval(()=>{if((me&&db&&F)||++n>30){clearInterval(t);onUser()}},400)},200)});
+  addEventListener("niuroo-auth",e=>{if(!e.detail){rvQueue=false;evDone=false;nfUid=null;stopNotifs();hide("ev");hide("rv")}setTimeout(()=>{revPaint();applyImg();bellPaint();let n=0;const t=setInterval(()=>{if((me&&db&&F)||++n>30){clearInterval(t);onUser()}},400)},200)});
   {let n=0;const t=setInterval(()=>{if(F&&db){clearInterval(t);startReviews()}else if(++n>60)clearInterval(t)},500)}
   $("#revOpen").onclick=()=>me?openReview():loginPrompt();
   $("#evSend").onclick=()=>$("#verSend").click();
@@ -1615,6 +1630,67 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   document.addEventListener("click",async e=>{
     const b=e.target.closest("[data-pfrm]");if(!b||!me)return;const k=b.dataset.pfrm;
     try{await F.setDoc(F.doc(db,"users",me.uid),{[k]:"",updated:F.serverTimestamp()},{merge:true});PROFILE={...PROFILE,[k]:""};applyImg();editPane();toast("Removed")}catch(x){toast(fire(x))}
+  });
+
+  /* ---------- notifications ---------- */
+  let NOTIFS={all:[],inbox:[]},SEEN=0,nfUn=[],nfInit={all:false,inbox:false},nfUid=null,NB=[];
+  const nfList=()=>[...NOTIFS.all,...NOTIFS.inbox].sort((a,b)=>cms(b.created)-cms(a.created)).slice(0,50);
+  function bellPaint(){const b=$("#bellBtn");if(!b)return;if(!me){b.hidden=true;return}b.hidden=false;const n=nfList().filter(x=>cms(x.created)>SEEN).length,e=$("#bellN");e.hidden=!n;e.textContent=n>9?"9+":n}
+  const brandIcon=()=>{const i=document.querySelector(".brand img");return i?i.src:""};
+  function popNotif(n){
+    const t=n.title||"Niuroo Games",b=n.body||"";
+    if((document.hidden||!document.hasFocus())&&"Notification"in window&&Notification.permission==="granted"){
+      try{const x=new Notification(t,{body:b,icon:brandIcon(),tag:n.id});x.onclick=()=>{window.focus();x.close();window.openUserPage("notifs")}}catch(e){}
+    }else toast("🔔 "+t+(b?": "+b:""));
+  }
+  function stopNotifs(){nfUn.forEach(u=>u());nfUn=[];NOTIFS={all:[],inbox:[]};nfInit={all:false,inbox:false};SEEN=0}
+  async function startNotifs(){
+    stopNotifs();if(!me||!db||!F)return;const uid=me.uid;
+    try{const d=await F.getDoc(F.doc(db,"users",uid)),v=d.exists()&&d.data().notifSeen;SEEN=v&&v.toMillis?v.toMillis():0}catch(x){SEEN=0}
+    if(!me||me.uid!==uid)return;
+    [["all",F.collection(db,"broadcasts")],["inbox",F.collection(db,"users",uid,"inbox")]].forEach(([k,col])=>{
+      nfUn.push(F.onSnapshot(F.query(col,F.orderBy("created","desc"),F.limit(30)),sn=>{
+        NOTIFS[k]=sn.docs.map(mk);
+        if(nfInit[k])sn.docChanges().forEach(c=>{if(c.type==="added"&&!c.doc.metadata.hasPendingWrites)popNotif(mk(c.doc))});
+        nfInit[k]=true;bellPaint();if($("#up").classList.contains("open")&&upPage==="notifs")upPaint();
+      },()=>{}));
+    });
+  }
+  async function markSeen(){if(!me||!db||!nfList().some(n=>cms(n.created)>SEEN))return;SEEN=Date.now();bellPaint();try{await F.setDoc(F.doc(db,"users",me.uid),{notifSeen:F.serverTimestamp()},{merge:true})}catch(x){}}
+  $("#bellBtn").onclick=()=>window.openUserPage("notifs");
+  document.addEventListener("click",e=>{
+    if(e.target.closest("[data-nfask]")){if("Notification"in window)Notification.requestPermission().then(()=>upPaint());return}
+    if(e.target.closest("[data-nftest]")){try{new Notification("Niuroo Games",{body:"Desktop alerts are working.",icon:brandIcon()})}catch(x){}}
+  });
+  /* admin: send notifications */
+  async function sendNotif(n){
+    const data={title:n.title,body:n.body,type:n.type||"info",created:F.serverTimestamp()};
+    if(n.to==="all")await F.addDoc(F.collection(db,"broadcasts"),data);else await F.addDoc(F.collection(db,"users",n.to,"inbox"),data);
+  }
+  async function uidByEmail(em){
+    const vs=[...new Set([em.trim().toLowerCase(),em.trim()])];
+    for(const c of ["users","tickets","orders"])for(const v of vs){const q=await F.getDocs(F.query(F.collection(db,c),F.where("email","==",v),F.limit(1)));if(!q.empty)return c==="users"?q.docs[0].id:q.docs[0].data().uid}
+    return null;
+  }
+  async function notifyView(B){
+    B.innerHTML=`<p class="muted">Loading…</p>`;
+    try{const q=await F.getDocs(F.query(F.collection(db,"broadcasts"),F.orderBy("created","desc"),F.limit(20)));NB=q.docs.map(mk)}catch(x){NB=[]}
+    B.innerHTML=`<div class="nf-card"><b><i class="fa-solid fa-bell"></i> Send a notification</b><div class="af"><label>Send to<select id="nf-to"><option value="all">Everyone</option><option value="one">One customer</option></select></label><label id="nf-em-l" hidden>Customer email<input id="nf-em" type="email" placeholder="customer@gmail.com"></label><label>Title<input id="nf-t" maxlength="60" placeholder="New game added"></label><label>Message<textarea id="nf-b" maxlength="200" rows="3" placeholder="Write the message…"></textarea></label><div class="aerr" id="nf-err"></div><button class="btn btn-primary btn-lg btn-block" id="nf-send" type="button"><i class="fa-solid fa-paper-plane"></i> Send notification</button></div></div><p class="ud-h">Sent to everyone (latest 20)</p>`
+    +(NB.length?NB.map(n=>`<div class="dm-row"><span class="tk-ic"><i class="fa-solid fa-bullhorn"></i></span><div class="t"><b>${esc(n.title)}</b><small>${esc(n.body)} · ${when(n.created)}</small></div><button class="btn btn-ghost btn-sm" data-nfdel="${n.id}">Delete</button></div>`).join(""):`<p class="muted">Nothing sent yet.</p>`);
+  }
+  document.addEventListener("change",e=>{if(e.target.id==="nf-to")$("#nf-em-l").hidden=e.target.value!=="one"});
+  document.addEventListener("click",async e=>{
+    const d=e.target.closest("[data-nfdel]");
+    if(d&&confirm("Delete this notification for everyone?")){try{await F.deleteDoc(F.doc(db,"broadcasts",d.dataset.nfdel));toast("Deleted");notifyView($("#dmBody"))}catch(x){toast(fire(x))}return}
+    if(!e.target.closest("#nf-send"))return;
+    const er=$("#nf-err"),to=$("#nf-to").value,title=$("#nf-t").value.trim(),body=$("#nf-b").value.trim();er.className="aerr";
+    const bad=m=>{er.textContent=m;er.className="aerr on"};
+    if(!title)return bad("Enter a title.");
+    try{
+      let target="all";
+      if(to==="one"){const em=$("#nf-em").value.trim();if(!em)return bad("Enter the customer's email.");target=await uidByEmail(em);if(!target)return bad("No customer found with that email. They must have logged in and placed an order or ticket.")}
+      await sendNotif({to:target,title,body});toast(to==="one"?"Sent to customer":"Sent to everyone");notifyView($("#dmBody"));
+    }catch(x){bad(fire(x))}
   });
 
   $("#checkout").onclick=openCheckout;
