@@ -446,6 +446,106 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
 .ad-card .ad-cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:2.4rem 1rem 1rem;font-size:1.3rem;background:linear-gradient(transparent,rgba(0,0,0,.8))}
 #a-prev img{max-height:150px;max-width:100%;border-radius:12px;display:block}
 .th3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+/* ---- bigger admin dashboard ---- */
+.dm{padding:calc(1.5vh + var(--safe-t)) 1.2vw calc(1.5vh + var(--safe-b))}
+.dm-card{max-width:1320px;width:100%;height:100%}
+.dm-top{padding:1.2rem 1.6rem}.dm-top h3{font-size:1.5rem}
+.dm-tabs{padding:1rem 1.6rem 0;gap:.5rem}.dm-tabs button{padding:.65rem 1.3rem;font-size:.95rem}
+.dm-body{padding:1.6rem;gap:1rem}
+.dm-row{padding:.85rem 1.05rem;border-radius:16px;border:1px solid rgba(var(--border),.08)}
+.gm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.1rem}
+.gm-card{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(var(--border),.1);transition:.2s}
+.gm-card:hover{transform:translateY(-3px);border-color:rgba(var(--accent),.6)}
+.gm-cover{position:relative;aspect-ratio:3/4;display:grid;place-items:center;font-size:3.4rem;color:rgba(255,255,255,.85)}
+.gm-stock{position:absolute;top:.7rem;left:.7rem;padding:.25rem .65rem;border-radius:99px;font-size:.72rem;font-weight:700;background:rgba(0,0,0,.7);font-family:var(--font-body,inherit)}
+.gm-stock.low{background:rgb(var(--err))}
+.gm-info{padding:.9rem 1rem .6rem;display:grid;gap:.15rem}.gm-info b{font-size:1.05rem}.gm-info small{color:rgba(255,255,255,.55)}
+.gm-act{display:flex;gap:.5rem;padding:0 1rem 1rem}.gm-act .btn{flex:1}
+.ov-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem}
+.ov-stats .ud-stat{padding:1.2rem}.ov-stats .ud-stat b{font-size:1.9rem}
+.ov-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem}
+.ov-box{padding:1.2rem;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(var(--border),.1);display:grid;gap:.6rem;align-content:start}
+.ov-box h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.ov-al{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:12px;background:rgba(var(--warn),.1);border:1px solid rgba(var(--warn),.3);text-align:left;font:inherit;color:inherit;cursor:pointer}
+.ov-al b{font-size:1.2rem}.ov-al i{margin-left:auto;opacity:.6}
+.ov-top{display:grid;grid-template-columns:minmax(0,1.3fr) 1fr auto;gap:.7rem;align-items:center;font-size:.9rem}
+.ov-top span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ov-top i{height:8px;border-radius:99px;background:linear-gradient(90deg,rgb(var(--accent)) var(--w),rgba(255,255,255,.08) var(--w))}
+.ov-ord{display:grid;grid-template-columns:90px 1fr auto auto;gap:.8rem;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(var(--border),.08);font-size:.9rem}
+.ov-ord small{color:rgba(255,255,255,.5)}.ov-ord span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:600px){.ov-ord{grid-template-columns:80px 1fr auto}.ov-ord small{display:none}.dm-body{padding:1rem}}
+/* ---- support tickets + chat ---- */
+.tk-new{padding:1.4rem;border-radius:20px;background:linear-gradient(135deg,rgba(var(--accent),.16),rgba(0,0,0,.2));border:1px solid rgba(var(--accent),.3)}
+.tk-new>b{display:flex;align-items:center;gap:.6rem;font-size:1.25rem}.tk-new>b i{color:rgb(var(--accent))}
+.tk-chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.tk-chips button{padding:.45rem .9rem;border-radius:99px;font-size:.8rem;font-weight:600;border:1px solid rgba(var(--border),.18);background:rgba(255,255,255,.05);color:inherit;cursor:pointer;transition:.15s}
+.tk-chips button:hover{border-color:rgb(var(--accent));background:rgba(var(--accent),.2)}
+.hist{margin:1.6rem 0 .7rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.6)}
+.tkrow{padding:.95rem 1.1rem;border:1px solid rgba(var(--border),.1);border-left:4px solid rgb(var(--accent))}
+.tk-ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none;background:rgba(var(--accent),.18);color:rgb(var(--accent))}
+.tk-empty{display:grid;justify-items:center;gap:.5rem;padding:2rem 1rem;border-radius:16px;border:1px dashed rgba(var(--border),.2);color:rgba(255,255,255,.55);text-align:center}.tk-empty i{font-size:2rem;color:rgb(var(--accent))}
+.tk-head{padding:1rem 1.1rem;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(var(--border),.1);display:grid;gap:.6rem}
+.tk-msgs{max-height:none;height:min(54vh,540px);min-height:260px;padding:1.1rem;gap:.75rem;align-content:start;border-radius:18px;background:radial-gradient(at top right,rgba(var(--accent),.1),transparent 60%),rgba(0,0,0,.3);border:1px solid rgba(var(--border),.08)}
+.bub{max-width:78%;padding:.7rem 1rem;border-radius:18px 18px 18px 6px;line-height:1.45;border:1px solid rgba(var(--border),.1)}
+.bub.admin{justify-self:start;background:rgba(var(--accent),.14);border-color:rgba(var(--accent),.32)}
+.bub.mine{justify-self:end;background:var(--grad-accent);border-color:transparent;border-radius:18px 18px 6px 18px}
+.bub small{opacity:.75}
+.tk-send{display:grid;grid-template-columns:1fr auto;gap:.6rem;align-items:end;margin-top:.8rem}
+.tk-send textarea{min-height:50px;resize:none;border-radius:16px}.tk-send .tk-err{grid-column:1/-1}
+.tk-send .btn{width:52px;height:52px;border-radius:50%;padding:0;display:grid;place-items:center}
+/* ---- polished account pages ---- */
+.up h2{font-size:clamp(1.7rem,4vw,2.3rem);margin:.2rem 0}
+.up .dm-row{padding:1rem 1.1rem;border-radius:16px;border:1px solid rgba(var(--border),.1);background:rgba(var(--card),.75)}
+.up-set{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:1rem;align-items:start}
+@media(max-width:860px){.up-set{grid-template-columns:1fr}}
+.up .acct{display:grid;justify-items:center;gap:.35rem;text-align:center}
+.up #avWrap>*{width:96px;height:96px;font-size:2.4rem;border-radius:50%;object-fit:cover;box-shadow:0 0 0 4px rgba(var(--accent),.3),0 12px 30px -8px rgba(var(--accent),.6)}
+.up #acName{font-size:1.5rem;margin-top:.5rem}
+.up .det{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin-top:1rem}
+.up .det div{flex-direction:column;gap:.15rem;padding:.75rem .9rem;border-radius:14px;border:1px solid rgba(var(--border),.1)}
+.up .det span{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em}.up .det b{text-align:left;font-size:.95rem}
+.up #logout{width:100%;margin-top:1rem;color:#ff6b81;border-color:rgba(255,107,129,.35)}
+.ep-h{display:grid;gap:.2rem;padding-bottom:.9rem;margin-bottom:.2rem;border-bottom:1px solid rgba(var(--border),.1)}
+.ep-h b{display:flex;align-items:center;gap:.6rem;font-size:1.25rem}.ep-h b i{color:rgb(var(--accent))}.ep-h small{color:rgba(255,255,255,.55);font-size:.86rem}
+.up #epf{grid-template-columns:1fr 1fr;gap:1rem}
+.up #epf .ep-h,.up #epf .aerr,.up #epf .btn{grid-column:1/-1}
+.up #epf input{height:50px}.up #epf input:disabled{opacity:.55}
+@media(max-width:560px){.up #epf{grid-template-columns:1fr}}
+.oc{display:grid;gap:.8rem;padding:1.1rem 1.2rem;border-radius:18px;background:rgba(var(--card),.75);border:1px solid rgba(var(--border),.1);border-left:4px solid rgba(255,255,255,.2)}
+.oc-pending{border-left-color:rgb(var(--warn))}.oc-paid{border-left-color:rgb(var(--accent))}.oc-delivered{border-left-color:rgb(var(--pos))}.oc-rejected{border-left-color:rgb(var(--err))}
+.oc-h{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.oc-h small,.oc-f small{display:block;color:rgba(255,255,255,.55)}
+.oc-items{display:flex;flex-wrap:wrap;gap:.5rem}
+.oc-items span{padding:.35rem .75rem;border-radius:99px;background:rgba(255,255,255,.07);font-size:.86rem}.oc-items i{color:rgb(var(--accent));margin-right:.25rem}
+.oc-f{display:flex;justify-content:space-between;align-items:center;padding-top:.7rem;border-top:1px solid rgba(var(--border),.08)}.oc-f b{font-size:1.35rem;font-family:var(--font-display)}
+.od-key{border:1px dashed rgba(var(--pos),.5);background:rgba(var(--pos),.08)}.od-key code{font-size:.95rem;letter-spacing:.02em}
+.tr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.tr{display:grid;gap:.2rem;justify-items:center;text-align:center;padding:1.1rem .6rem;border-radius:16px;background:rgba(var(--card),.75);border:1px solid rgba(var(--border),.1);opacity:.55}
+.tr i{font-size:1.6rem;color:rgba(255,255,255,.4)}.tr small{color:rgba(255,255,255,.55)}
+.tr.on{opacity:1}.tr.on i{color:rgb(var(--accent))}
+.tr.cur{border-color:rgb(var(--accent));box-shadow:0 0 30px -10px rgba(var(--accent),.8)}
+/* ---- admin orders + chart ---- */
+.ord-list{display:grid;gap:.9rem}
+.oa-ctl{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}.oa-ctl:empty{display:none}
+.oa-ctl select{min-width:130px}.oa-ctl input{flex:1;min-width:200px}
+.ov-chart{display:grid;grid-template-columns:repeat(7,1fr);gap:.7rem;height:200px}
+.ov-chart>div{display:flex;flex-direction:column;align-items:center;gap:.35rem;min-width:0}
+.ov-chart b{font-size:.74rem;font-weight:600;height:1rem;white-space:nowrap}.ov-chart small{color:rgba(255,255,255,.55);font-size:.78rem}
+.ov-chart .bar{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.ov-chart .bar i{width:min(46px,70%);border-radius:10px 10px 4px 4px;background:var(--grad-accent);transition:height .3s}
+/* ---- popups + reviews ---- */
+.pm{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:1rem;background:rgba(5,2,9,.78);backdrop-filter:blur(8px)}
+.pm[hidden]{display:none}
+.pm-card{width:min(440px,100%);display:grid;gap:.8rem;padding:1.8rem 1.6rem 1.2rem;border-radius:24px;text-align:center;background:rgb(var(--card));border:1px solid rgba(var(--accent),.4);box-shadow:0 30px 80px -20px rgba(0,0,0,.8),0 0 60px -25px rgba(var(--accent),.7);animation:slide .2s ease-out}
+.pm-card h3{font-size:1.45rem}.pm-card p{font-size:.93rem}
+.pm-ic{width:64px;height:64px;margin:0 auto;border-radius:20px;display:grid;place-items:center;font-size:1.7rem;background:var(--grad-accent)}
+.pm-skip{padding:.7rem;font:inherit;font-size:.9rem;font-weight:600;color:rgba(255,255,255,.6);background:none;border:0;cursor:pointer}.pm-skip:hover{color:#fff}
+.rv-stars{display:flex;justify-content:center;gap:.3rem}
+.rv-stars button{font-size:2.2rem;line-height:1;color:rgba(255,255,255,.2);background:none;border:0;cursor:pointer;transition:.12s}
+.rv-stars button.on{color:rgb(var(--warn));transform:scale(1.08)}
+.pm .af textarea{text-align:left}
+.rv-cta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin:-.4rem 0 1.4rem}
+#revList{margin-bottom:1.1rem}#revList:empty{display:none}
+.rcard small span{text-align:right}
+.rdel{margin-left:.6rem;font:inherit;font-size:.75rem;color:#ff6b81;background:none;border:0;cursor:pointer}
 </style>
 </head>
 <body>
@@ -541,6 +641,8 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
 
   <section class="section" id="reviews"><div class="wrap">
     <div class="sec-head"><span class="eyebrow">Reviews</span><h2>Loved by <span class="tgrad">gamers.</span></h2></div>
+    <div class="rv-cta"><button class="btn btn-primary" type="button" id="revOpen"><i class="fa-solid fa-pen"></i> Write a review</button><span class="muted">Bought a game? Tell other gamers how it went.</span></div>
+    <div class="reviews" id="revList"></div>
     <div class="reviews">
       <article class="rcard"><div class="stars">★★★★★</div><p>Key mila 10 second me, activate hote hi game chalu. Smooth experience.</p><small><b>Rohan K.</b><span>Verified order</span></small></article>
       <article class="rcard"><div class="stars">★★★★★</div><p>Best prices I found, and support replied in minutes when I had a region question.</p><small><b>Aman S.</b><span>Verified order</span></small></article>
@@ -619,9 +721,11 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
   </div>
 </div></div>
 <div class="up" id="up" role="region" aria-label="My account"><div class="up-in" id="upBody"></div></div>
+<div class="pm" id="ev" role="dialog" aria-modal="true" aria-label="Verify your email" hidden><div class="pm-card"><div class="pm-ic"><i class="fa-solid fa-envelope-circle-check"></i></div><h3>Verify your email</h3><p class="muted">Please verify <b id="evMail"></b> to keep your account and orders secure. After sending, check your inbox and spam folder.</p><button class="btn btn-primary btn-block" type="button" id="evSend">Send verification email</button><button class="btn btn-ghost btn-block" type="button" id="evRef">I verified, refresh</button><button class="pm-skip" type="button" id="evSkip">Do it later / Skip</button></div></div>
+<div class="pm" id="rv" role="dialog" aria-modal="true" aria-label="Write a review" hidden><div class="pm-card"><div class="pm-ic"><i class="fa-solid fa-star"></i></div><h3 id="rvT">Write a review</h3><p class="muted" id="rvS"></p><div class="rv-stars" id="rvStars" role="radiogroup" aria-label="Rating"><button type="button" data-rs="1" aria-label="1 star">★</button><button type="button" data-rs="2" aria-label="2 star">★</button><button type="button" data-rs="3" aria-label="3 star">★</button><button type="button" data-rs="4" aria-label="4 star">★</button><button type="button" data-rs="5" aria-label="5 star">★</button></div><div class="af"><textarea id="rvTx" maxlength="400" rows="4" placeholder="Share your experience…"></textarea><div class="aerr" id="rvErr"></div></div><button class="btn btn-primary btn-block" type="button" id="rvGo">Submit review</button><button class="pm-skip" type="button" id="rvSkip">Do it later</button></div></div>
 <div class="dm" id="dm"><div class="dm-card" role="dialog" aria-label="Dashboard">
   <div class="dm-top"><h3>Dashboard</h3><button class="icon-btn" id="closeDm" aria-label="Close dashboard"><i class="fa-solid fa-xmark"></i></button></div>
-  <div class="dm-tabs"><button class="on" data-dt="games">Games</button><button data-dt="ads">Ads</button><button data-dt="tickets">Tickets<span id="tkBadge"></span></button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
+  <div class="dm-tabs"><button class="on" data-dt="overview">Overview</button><button data-dt="games">Games</button><button data-dt="ads">Ads</button><button data-dt="tickets">Tickets<span id="tkBadge"></span></button><button data-dt="checkout">Checkout</button><button data-dt="orders">Orders</button></div>
   <div class="dm-body" id="dmBody"></div>
 </div></div>
 <div class="am" id="co"><div class="am-card" id="coBody"></div></div>
@@ -944,7 +1048,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
 (()=>{
   const $=s=>document.querySelector(s);
   const esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  let db=null,F=null,me=null,STORE={},isAdmin=false,seeded=false,adsSeeded=false,adEdit=null,aImg="",editing=null,tab="games",pImg="",pQR="";
+  let db=null,F=null,me=null,STORE={},isAdmin=false,seeded=false,adsSeeded=false,adEdit=null,aImg="",editing=null,tab="overview",pImg="",pQR="";
   const DEFAULTS=GAMES.map((g,i)=>({...g,stock:STOCK[i]||10,order:i}));
   GAMES=DEFAULTS;
   const DEFAULT_ADS=ADS.map((a,i)=>({...a,aid:"ad"+i,order:i,active:true}));ADS=DEFAULT_ADS;
@@ -984,6 +1088,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   function renderDash(){
     document.querySelectorAll(".dm-tabs button").forEach(b=>b.classList.toggle("on",b.dataset.dt===tab));
     const B=$("#dmBody");
+    if(tab==="overview")return overview(B);
     if(tab==="games")return editing?gameForm(B):gameList(B);
     if(tab==="ads")return adEdit?adForm(B):adList(B);
     if(tab==="tickets")return adminTickets(B);
@@ -991,8 +1096,28 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     return ordersView(B);
   }
   function gameList(B){
-    B.innerHTML=`<div class="dm-bar"><button class="btn btn-primary btn-sm" data-act="new"><i class="fa-solid fa-plus"></i> Add game</button>${seeded?"":`<button class="btn btn-ghost btn-sm" data-act="seed">Save default games to database</button>`}</div>`
-    +GAMES.map(g=>`<div class="dm-row"><div class="th" style="background:${grad(g)}"></div><div class="t"><b>${esc(g.name)}</b><small>${esc(g.genre)} · ${money(g.price)} · stock ${g.stock??0}</small></div><button class="btn btn-ghost btn-sm" data-act="edit" data-id="${g.id}">Edit</button><button class="btn btn-ghost btn-sm" data-act="del" data-id="${g.id}">Delete</button></div>`).join("");
+    B.innerHTML=`<div class="dm-bar"><button class="btn btn-primary" data-act="new"><i class="fa-solid fa-plus"></i> Add game</button>${seeded?"":`<button class="btn btn-ghost" data-act="seed">Save default games to database</button>`}<span class="muted" style="align-self:center">${GAMES.length} games</span></div><div class="gm-grid">`
+    +GAMES.map(g=>{const st=g.stock??0;return `<div class="gm-card"><div class="gm-cover" style="background:${grad(g)}">${g.img?"":`<i class="fa-solid ${esc(g.icon)}"></i>`}<span class="gm-stock ${st<=3?"low":""}">${st<=0?"Out of stock":"Stock "+st}</span></div><div class="gm-info"><b>${esc(g.name)}</b><small>${esc(g.genre)}</small><span>${money(g.price)}${g.old?` <s class="muted">${money(g.old)}</s>`:""}</span></div><div class="gm-act"><button class="btn btn-ghost btn-sm" data-act="edit" data-id="${g.id}">Edit</button><button class="btn btn-ghost btn-sm" data-act="del" data-id="${g.id}">Delete</button></div></div>`}).join("")+`</div>`;
+  }
+  async function overview(B){
+    B.innerHTML=`<p class="muted">Loading overview…</p>`;
+    try{
+      const q=await F.getDocs(F.query(F.collection(db,"orders"),F.orderBy("created","desc"),F.limit(200)));
+      const O=q.docs.map(d=>({id:d.id,...d.data()})),ok=O.filter(o=>o.status==="paid"||o.status==="delivered"),sum=x=>x.reduce((a,o)=>a+(+o.total||0),0);
+      const d0=new Date();d0.setHours(0,0,0,0);const td=ok.filter(o=>o.created&&o.created.toMillis&&o.created.toMillis()>=d0.getTime());
+      const pend=O.filter(o=>o.status==="pending"),need=ALL.filter(t=>t.status==="open"&&t.lastBy==="user"),low=GAMES.filter(g=>(g.stock??0)<=3);
+      const sold={};ok.forEach(o=>(o.items||[]).forEach(i=>{sold[i.name]=(sold[i.name]||0)+(+i.q||1)}));
+      const top=Object.entries(sold).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=top.length?top[0][1]:1;
+      const days=[...Array(7)].map((_,i)=>{const d=new Date(d0);d.setDate(d.getDate()-6+i);return d}),dv=days.map(d=>{const a=d.getTime(),b=a+864e5;return sum(ok.filter(o=>{const t=o.created&&o.created.toMillis?o.created.toMillis():0;return t>=a&&t<b}))}),dmx=Math.max(...dv,1);
+      const chart=`<div class="ov-box"><h4>Revenue, last 7 days</h4><div class="ov-chart">${dv.map((v,i)=>`<div><b>${v?money(v):""}</b><div class="bar"><i style="height:${Math.max(3,v/dmx*100)}%"></i></div><small>${days[i].toLocaleDateString("en-IN",{weekday:"short"})}</small></div>`).join("")}</div></div>`;
+      const st=[[money(sum(ok)),"Revenue (paid + delivered)"],[money(sum(td)),"Today · "+td.length+" orders"],[O.length,"Orders (last 200)"],[pend.length,"Awaiting payment check"],[need.length,"Tickets need reply"],[GAMES.length,"Games in store"]];
+      const al=(n,t,tab)=>n?`<button class="ov-al" type="button" data-dt="${tab}"><b>${n}</b> ${t}<i class="fa-solid fa-chevron-right"></i></button>`:"";
+      const alerts=al(pend.length,"order(s) waiting for payment check","orders")+al(need.length,"ticket(s) waiting for your reply","tickets")+al(low.length,"game(s) low on stock: "+low.slice(0,3).map(g=>esc(g.name)+" ("+(g.stock??0)+")").join(", "),"games");
+      B.innerHTML=`<div class="ov-stats">${st.map(x=>`<div class="ud-stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>
+      <div class="ov-cols"><div class="ov-box"><h4>Needs attention</h4>${alerts||`<p class="muted">All clear. Nothing is waiting.</p>`}</div>
+      <div class="ov-box"><h4>Top sellers</h4>${top.length?top.map(t=>`<div class="ov-top"><span>${esc(t[0])}</span><i style="--w:${Math.round(t[1]/mx*100)}%"></i><b>${t[1]}</b></div>`).join(""):`<p class="muted">No paid orders yet.</p>`}</div></div>
+      ${chart}<div class="ov-box"><h4>Recent orders</h4>${O.slice(0,6).map(o=>`<div class="ov-ord"><b>${money(+o.total||0)}</b><span>${esc(o.email||o.name||"customer")}</span><small>${when(o.created)}</small><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span></div>`).join("")||`<p class="muted">No orders yet.</p>`}</div>`;
+    }catch(x){B.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
   }
   function gameForm(B){
     const g=editing==="new"?{name:"",genre:"",price:"",old:"",stock:10,icon:"fa-gamepad",c:["#3b1d6e","#c9822b"],d:"",img:""}:GAMES.find(x=>x.id===editing);
@@ -1041,13 +1166,37 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     try{await F.setDoc(F.doc(db,"settings","store"),{upi,upiName:v("s-name"),contact,note:v("s-note"),qr:pQR||""},{merge:true});toast("Checkout settings saved")}catch(x){err("#cerr",fire(x))}
   }
   const STAT=["pending","paid","delivered","rejected"];
+  let OL=[],ofl="all",oq="";
   async function ordersView(B){
-    B.innerHTML=`<div class="dm-bar"><button class="btn btn-ghost btn-sm" data-act="reload"><i class="fa-solid fa-rotate"></i> Refresh</button></div><p class="muted">Loading orders…</p>`;
-    try{
-      const s=await F.getDocs(F.query(F.collection(db,"orders"),F.orderBy("created","desc"),F.limit(50)));
-      B.innerHTML=`<div class="dm-bar"><button class="btn btn-ghost btn-sm" data-act="reload"><i class="fa-solid fa-rotate"></i> Refresh</button></div>`+(s.empty?`<p class="muted">No orders yet.</p>`:s.docs.map(d=>{const o=d.data();return `<div class="dm-row" style="flex-wrap:wrap"><div class="t" style="flex:1 1 260px"><b>${money(+o.total||0)} · ${esc(o.email||o.name||"customer")}</b><small>${(o.items||[]).map(i=>esc(i.q)+"× "+esc(i.name)).join(", ")}<br>UTR: ${esc(o.txn)}</small></div><select data-os="${d.id}">${STAT.map(x=>`<option ${x===o.status?"selected":""}>${x}</option>`).join("")}</select><input data-od="${d.id}" placeholder="Key / delivery details" value="${esc(o.delivery||"")}"><button class="btn btn-primary btn-sm" data-act="osave" data-id="${d.id}">Save</button></div>`}).join(""));
-    }catch(x){B.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
+    B.innerHTML=`<p class="muted">Loading orders…</p>`;
+    try{const q=await F.getDocs(F.query(F.collection(db,"orders"),F.orderBy("created","desc"),F.limit(200)));OL=q.docs.map(d=>({id:d.id,...d.data()}));ordersShell(B)}
+    catch(x){B.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
   }
+  function ordersShell(B){
+    const n=k=>k==="all"?OL.length:OL.filter(o=>o.status===k).length;
+    B.innerHTML=`<div class="dm-bar"><input id="oq" type="text" placeholder="Search email, UTR, order id or game…" value="${esc(oq)}" style="flex:1;min-width:220px"><button class="btn btn-ghost btn-sm" data-act="reload"><i class="fa-solid fa-rotate"></i> Refresh</button><button class="btn btn-ghost btn-sm" data-act="csv"><i class="fa-solid fa-file-csv"></i> Export CSV</button></div><div class="dm-bar">${["all",...STAT].map(k=>`<button class="btn ${ofl===k?"btn-primary":"btn-ghost"} btn-sm" data-ofl="${k}">${k[0].toUpperCase()+k.slice(1)} (${n(k)})</button>`).join("")}</div><div class="ord-list" id="ordList"></div>`;
+    ordersList();
+  }
+  const ordersFiltered=()=>{const q=oq.trim().toLowerCase();return OL.filter(o=>(ofl==="all"||o.status===ofl)&&(!q||[o.email,o.name,o.txn,o.id,...(o.items||[]).map(i=>i.name)].join(" ").toLowerCase().includes(q)))};
+  function ordersList(){
+    const E=$("#ordList");if(!E)return;const L=ordersFiltered();
+    E.innerHTML=L.length?L.map(o=>`<div class="oc oc-${esc(o.status)}"><div class="oc-h"><div><b>${esc(o.email||o.name||"customer")}</b><small>Order #${esc(o.id.slice(0,8))} · ${when(o.created)}</small></div><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span></div><div class="oc-items">${(o.items||[]).map(i=>`<span><i class="fa-solid fa-gamepad"></i> ${esc(i.q)}× ${esc(i.name)}</span>`).join("")}</div><div class="oc-f"><small>UTR ${esc(o.txn||"-")}</small><b>${money(+o.total||0)}</b></div><div class="oa-ctl"><select data-os="${o.id}">${STAT.map(x=>`<option ${x===o.status?"selected":""}>${x}</option>`).join("")}</select><input type="text" data-od="${o.id}" placeholder="Key / delivery details" value="${esc(o.delivery||"")}"><button class="btn btn-primary btn-sm" data-act="osave" data-id="${o.id}">Save</button></div><div class="oa-ctl">${o.status==="pending"?`<button class="btn btn-ghost btn-sm" data-oq="paid" data-id="${o.id}"><i class="fa-solid fa-check"></i> Mark paid</button><button class="btn btn-ghost btn-sm" data-oq="rejected" data-id="${o.id}"><i class="fa-solid fa-xmark"></i> Reject</button>`:""}${o.status==="paid"?`<button class="btn btn-ghost btn-sm" data-oq="delivered" data-id="${o.id}"><i class="fa-solid fa-truck-fast"></i> Mark delivered</button>`:""}</div></div>`).join(""):`<p class="muted">No orders match.</p>`;
+  }
+  document.addEventListener("input",e=>{if(e.target.id==="oq"){oq=e.target.value;ordersList()}});
+  document.addEventListener("click",async e=>{
+    const c=e.target;let x;
+    if(x=c.closest("[data-ofl]")){ofl=x.dataset.ofl;ordersShell($("#dmBody"));return}
+    if(x=c.closest("[data-act=osave]")){const k=x.dataset.id,o=OL.find(v=>v.id===k),sv=document.querySelector(`[data-os="${k}"]`),dv=document.querySelector(`[data-od="${k}"]`);if(o&&sv&&dv){o.status=sv.value;o.delivery=dv.value.trim()}return}
+    if(x=c.closest("[data-oq]")){
+      const k=x.dataset.id,o=OL.find(v=>v.id===k),dv=document.querySelector(`[data-od="${k}"]`);if(!o)return;
+      try{await F.updateDoc(F.doc(db,"orders",k),{status:x.dataset.oq,delivery:dv?dv.value.trim().slice(0,500):(o.delivery||"")});o.status=x.dataset.oq;if(dv)o.delivery=dv.value.trim();toast("Order marked "+x.dataset.oq);ordersShell($("#dmBody"))}catch(y){toast(fire(y))}
+      return}
+    if(c.closest("[data-act=csv]")){
+      const L=ordersFiltered(),q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+      const csv=[["Order","Date","Email","Items","Total","UTR","Status","Delivery"].map(q).join(",")].concat(L.map(o=>[o.id,o.created&&o.created.toDate?o.created.toDate().toISOString():"",o.email||o.name||"",(o.items||[]).map(i=>i.q+"x "+i.name).join("; "),o.total,o.txn,o.status,o.delivery||""].map(q).join(","))).join("\n");
+      const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="orders.csv";document.body.appendChild(a);a.click();a.remove();toast("Exported "+L.length+" orders");
+    }
+  });
 
   /* ---------- ads tab ---------- */
   async function seedAds(){const b=F.writeBatch(db);DEFAULT_ADS.forEach(a=>b.set(F.doc(db,"ads",a.aid),a));await b.commit()}
@@ -1137,6 +1286,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     toast(pl?"Image added. Ad colours matched to it. Press Save ad.":"Image added. Pick colours by hand, then Save ad.");
   });
   document.addEventListener("click",e=>{if(e.target.closest("[data-aclr]")){aImg="";$("#a-img").value="";$("#a-prev").innerHTML=""}});
+  document.addEventListener("click",e=>{const c=e.target.closest("[data-chip]");if(c){const i=$("#nt-sub");i.value=c.dataset.chip;$("#nt-msg").focus()}});
   $("#closeDm").onclick=()=>$("#dm").classList.remove("open");
   $("#dm").addEventListener("click",e=>{if(e.target.id==="dm")$("#dm").classList.remove("open")});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("#dm").classList.remove("open");$("#co").classList.remove("open")}});
@@ -1176,7 +1326,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   const mk=d=>({id:d.id,...dd(d)});
   const tms=t=>t.updated&&t.updated.toMillis?t.updated.toMillis():0;
   const pill=s=>`<span class="pill-st st-${s}">${s}</span>`;
-  const row=(t,scope)=>`<div class="dm-row tkrow" data-tk="${t.id}" data-tkscope="${scope}" role="button" tabindex="0"><div class="t"><b>${esc(t.subject)}</b><small>${scope==="admin"?esc(t.email||t.name||"")+" · ":""}${esc(t.lastMsg||"")} · ${when(t.updated)}</small></div>${scope==="admin"&&t.status==="open"&&t.lastBy==="user"?`<span class="pill-st st-open">needs reply</span>`:pill(t.status)}</div>`;
+  const row=(t,scope)=>`<div class="dm-row tkrow" data-tk="${t.id}" data-tkscope="${scope}" role="button" tabindex="0"><span class="tk-ic"><i class="fa-solid fa-ticket"></i></span><div class="t"><b>${esc(t.subject)}</b><small>${scope==="admin"?esc(t.email||t.name||"")+" · ":""}${esc(t.lastMsg||"")} · ${when(t.updated)}</small></div>${scope==="admin"&&t.status==="open"&&t.lastBy==="user"?`<span class="pill-st st-open">needs reply</span>`:pill(t.status)}</div>`;
 
   function ensure(){
     if(!F||!db)return;
@@ -1201,14 +1351,15 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   function leaveThread(scope){if(thread&&(!scope||thread.scope===scope)){thread.un.forEach(u=>u());thread=null}}
   function openThread(el,id,scope,onBack){
     leaveThread();const un=[];thread={id,scope,un,onBack};
-    el.innerHTML=`<button class="back" type="button" data-tkback><i class="fa-solid fa-arrow-left"></i> Back</button><div class="tk-head"></div><div class="tk-msgs" aria-live="polite"></div><form class="af tk-send" novalidate><textarea maxlength="1000" rows="2" placeholder="Write a message"></textarea><div class="aerr tk-err"></div><button class="btn btn-primary btn-block" type="submit">Send</button></form>`;
+    el.innerHTML=`<button class="back" type="button" data-tkback><i class="fa-solid fa-arrow-left"></i> Back</button><div class="tk-head"></div><div class="tk-msgs" aria-live="polite"></div><form class="af tk-send" novalidate><textarea maxlength="1000" rows="1" placeholder="Write a message… (Enter to send)"></textarea><button class="btn btn-primary" type="submit" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button><div class="aerr tk-err"></div></form>`;
     const H=el.querySelector(".tk-head"),M=el.querySelector(".tk-msgs"),Fm=el.querySelector(".tk-send");
     let t=null,extra="";
     const head=()=>{if(!t)return;H.innerHTML=`<div class="dm-bar" style="justify-content:space-between;align-items:center"><b>${esc(t.subject)}</b>${pill(t.status)}</div>${scope==="admin"?`<p class="muted" style="font-size:.84rem">${esc(t.name||"")} · ${esc(t.email||"")}${extra}</p>`:""}<div class="dm-bar">${t.status==="open"?`<button class="btn btn-ghost btn-sm" type="button" data-tkclose>Close ticket</button>`:(scope==="admin"?`<button class="btn btn-ghost btn-sm" type="button" data-tkopen>Reopen</button>`:"")}${t.status==="closed"?`<span class="muted" style="font-size:.84rem">Closed${t.closedBy?" by "+esc(t.closedBy):""}.</span>`:""}</div>`;Fm.hidden=t.status!=="open"};
     un.push(F.onSnapshot(F.doc(db,"tickets",id),d=>{const first=!t;t=d.exists()?mk(d):null;if(!t){M.textContent="Ticket not found.";return}head();
       if(first&&scope==="admin")F.getDoc(F.doc(db,"users",t.uid)).then(u=>{if(u.exists()){const p=u.data();extra=(p.phone?" · "+esc(p.phone):"")+(p.contact?" · "+esc(p.contact):"");head()}}).catch(()=>{})},e=>{M.textContent=fire(e)}));
     un.push(F.onSnapshot(F.query(F.collection(db,"tickets",id,"messages"),F.orderBy("created","asc")),s=>{
-      M.innerHTML=s.docs.map(d=>{const m=dd(d);return `<div class="bub ${m.role==="admin"?"admin":""}">${esc(m.text)}<small>${esc(m.role==="admin"?"Support":(m.name||"Customer"))} · ${when(m.created)}</small></div>`}).join("")||"<p class='muted'>No messages yet.</p>";M.scrollTop=M.scrollHeight},e=>{M.textContent=fire(e)}));
+      M.innerHTML=s.docs.map(d=>{const m=dd(d);return `<div class="bub ${m.role==="admin"?"admin":""} ${m.role===(scope==="admin"?"admin":"user")?"mine":""}">${esc(m.text)}<small>${esc(m.role==="admin"?"Support":(m.name||"Customer"))} · ${when(m.created)}</small></div>`}).join("")||"<p class='muted'>No messages yet.</p>";M.scrollTop=M.scrollHeight},e=>{M.textContent=fire(e)}));
+    Fm.querySelector("textarea").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();Fm.requestSubmit()}});
     Fm.onsubmit=async e=>{
       e.preventDefault();const ta=Fm.querySelector("textarea"),txt=ta.value.trim(),er=Fm.querySelector(".tk-err");if(!txt)return;er.className="aerr tk-err";
       const role=scope==="admin"?"admin":"user";
@@ -1220,8 +1371,8 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   }
   function myPane(){
     const P=$("#acPane-tickets");
-    if(!P.querySelector("#ntf"))P.innerHTML=`<form class="af" id="ntf" novalidate><b>Create a ticket</b><label>Subject<input id="nt-sub" maxlength="80" placeholder="Order not delivered"></label><label>Message<textarea id="nt-msg" maxlength="1000" rows="3" placeholder="Describe your problem"></textarea></label><div class="aerr" id="nterr"></div><button class="btn btn-primary btn-block" type="submit">Submit ticket</button></form><h4 class="hist">Ticket history</h4><div id="tkHist" class="dm-body" style="padding:0"></div>`;
-    $("#tkHist").innerHTML=MY.length?MY.map(t=>row(t,"user")).join(""):`<p class="muted">No tickets yet.</p>`;
+    if(!P.querySelector("#ntf"))P.innerHTML=`<form class="af tk-new" id="ntf" novalidate><b><i class="fa-solid fa-headset"></i> Create a ticket</b><p class="muted" style="font-size:.9rem;margin:-.3rem 0 0">Tell us what went wrong. Our team usually replies within a few hours.</p><div class="tk-chips">${["Order not delivered","Wrong key","Payment issue","Refund request"].map(c=>`<button type="button" data-chip="${c}">${c}</button>`).join("")}</div><label>Subject<input id="nt-sub" maxlength="80" placeholder="Order not delivered"></label><label>Message<textarea id="nt-msg" maxlength="1000" rows="4" placeholder="Describe your problem"></textarea></label><div class="aerr" id="nterr"></div><button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit ticket</button></form><h4 class="hist">Ticket history</h4><div id="tkHist" class="dm-body" style="padding:0"></div>`;
+    $("#tkHist").innerHTML=MY.length?MY.map(t=>row(t,"user")).join(""):`<div class="tk-empty"><i class="fa-regular fa-comments"></i><p>No tickets yet. Your conversations with support will show up here.</p></div>`;
   }
   function paintDetails(){
     const D=$("#acDetails");if(!D||!me)return;
@@ -1231,7 +1382,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   }
   function editPane(){
     if(!me)return;const P=$("#acPane-edit"),pw=(me.providerData||[]).some(p=>p.providerId==="password");
-    P.innerHTML=`<form class="af" id="epf" novalidate><label>Name<input id="e-name" maxlength="50" value="${esc(me.displayName||PROFILE.name||"")}"></label><label>Email<input value="${esc(me.email||"")}" disabled></label><label>Phone<input id="e-phone" type="tel" maxlength="20" value="${esc(PROFILE.phone||"")}" placeholder="+91 98765 43210"></label><label>Discord or WhatsApp<input id="e-contact" maxlength="40" value="${esc(PROFILE.contact||"")}" placeholder="username or number"></label><div class="aerr" id="eerr"></div><button class="btn btn-primary btn-block" type="submit">Save profile</button>${pw?`<button class="btn btn-ghost btn-block" type="button" id="pwreset">Send password reset email</button>`:""}</form>`;
+    P.innerHTML=`<form class="af" id="epf" novalidate><div class="ep-h"><b><i class="fa-solid fa-user-pen"></i> Edit profile</b><small>We use these details to reach you about your orders.</small></div><label>Name<input id="e-name" maxlength="50" value="${esc(me.displayName||PROFILE.name||"")}"></label><label>Email<input value="${esc(me.email||"")}" disabled></label><label>Phone<input id="e-phone" type="tel" maxlength="20" value="${esc(PROFILE.phone||"")}" placeholder="+91 98765 43210"></label><label>Discord or WhatsApp<input id="e-contact" maxlength="40" value="${esc(PROFILE.contact||"")}" placeholder="username or number"></label><div class="aerr" id="eerr"></div><button class="btn btn-primary btn-block" type="submit">Save profile</button>${pw?`<button class="btn btn-ghost btn-block" type="button" id="pwreset">Send password reset email</button>`:""}</form>`;
   }
   function setAcTab(t){
     if(t!=="tickets"&&thread&&thread.scope==="user")leaveThread();
@@ -1278,7 +1429,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   const cms=t=>t&&t.toMillis?t.toMillis():Date.now();
   const TIERS=[["Bronze",0],["Silver",1000],["Gold",2000],["Diamond",4000],["Platinum",10000]];
   const TILES=[["orders","box","My orders","Payment and delivery history"],["library","gamepad","My library","Purchased games and keys"],["rewards","gift","Rewards","Points, level and tiers"],["notifs","bell","Notifications","Delivery and support updates"],["tickets","life-ring","Support tickets","Get help with an order"],["settings","gear","Account settings","Profile and security"]];
-  const oCard=o=>`<div class="dm-row" style="flex-wrap:wrap"><div class="t" style="flex:1 1 240px"><b>${money(+o.total||0)}</b><small>${(o.items||[]).map(i=>esc(i.q)+"× "+esc(i.name)).join(", ")}</small><small>${when(o.created)} · Order ${esc(o.id.slice(0,8))} · UTR ${esc(o.txn||"-")}</small></div><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span>${o.delivery?`<div class="od-key"><span>Your key / delivery details</span><code>${esc(o.delivery)}</code><button class="btn btn-ghost btn-sm" type="button" data-ud="copy" data-v="${esc(o.delivery)}">Copy</button></div>`:""}</div>`;
+  const oCard=o=>`<div class="oc oc-${esc(o.status)}"><div class="oc-h"><div><b>Order #${esc(o.id.slice(0,8))}</b><small>${when(o.created)}</small></div><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span></div><div class="oc-items">${(o.items||[]).map(i=>`<span><i class="fa-solid fa-gamepad"></i> ${esc(i.q)}× ${esc(i.name)}</span>`).join("")}</div><div class="oc-f"><small>UTR ${esc(o.txn||"-")}</small><b>${money(+o.total||0)}</b></div>${o.delivery?`<div class="od-key"><span><i class="fa-solid fa-key"></i> Your key / delivery details</span><code>${esc(o.delivery)}</code><button class="btn btn-ghost btn-sm" type="button" data-ud="copy" data-v="${esc(o.delivery)}"><i class="fa-regular fa-copy"></i> Copy</button></div>`:""}</div>`;
   const park=()=>{const h=$("#amAcct");["account","tickets","edit"].forEach(k=>h.appendChild($("#acPane-"+k)))};
   function upStats(){
     const L=UO||[],ok=L.filter(o=>o.status==="paid"||o.status==="delivered"),pts=Math.floor(ok.reduce((a,o)=>a+(+o.total||0),0)),own=new Set();
@@ -1294,7 +1445,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     if(pg==="tickets"||pg==="settings"){
       B.innerHTML=back+head+`<div class="up-box" id="upHost"></div>`;
       if(pg==="tickets"){setAcTab("tickets");$("#upHost").appendChild($("#acPane-tickets"))}
-      else{setAcTab("account");setAcTab("edit");["account","edit"].forEach(k=>{const e=$("#acPane-"+k);e.hidden=false;$("#upHost").appendChild(e)})}
+      else{B.innerHTML=back+head+`<div class="up-set"><div class="up-box" id="upSetA"></div><div class="up-box" id="upSetB"></div></div>`;setAcTab("account");setAcTab("edit");[["account","A"],["edit","B"]].forEach(([k,x])=>{const e=$("#acPane-"+k);e.hidden=false;$("#upSet"+x).appendChild(e)})}
       return}
     if(!UO){B.innerHTML=back+`<p class="muted">Loading your account…</p>`;return}
     if(UO.err){B.innerHTML=back+`<div class="aerr on">${esc(UO.err)}</div>`;return}
@@ -1302,7 +1453,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     let body="";
     if(pg==="orders")body=UO.length?UO.map(oCard).join(""):`<p class="muted">You have no orders yet.</p>`;
     else if(pg==="library"){const d=UO.filter(o=>o.status==="delivered");body=d.length?d.map(oCard).join(""):`<p class="muted">Delivered purchases appear here with your key or account details.</p>`}
-    else if(pg==="rewards")body=`<div class="up-box"><b>${S.tier[0]}</b> · ${S.pts.toLocaleString("en-IN")} pts${S.next?` · ${(S.next[1]-S.pts).toLocaleString("en-IN")} to ${S.next[0]}`:""}<div class="up-bar"><i style="width:${Math.min(100,S.pts/100)}%"></i></div><div class="up-tiers">${TIERS.map(t=>`<span>${t[0]} (${t[1]>=1000?t[1]/1000+"K":t[1]})</span>`).join("")}</div></div><p class="muted">You earn 1 point for every ₹1 spent on paid or delivered orders.</p>`;
+    else if(pg==="rewards")body=`<div class="up-box"><b>${S.tier[0]}</b> · ${S.pts.toLocaleString("en-IN")} pts${S.next?` · ${(S.next[1]-S.pts).toLocaleString("en-IN")} to ${S.next[0]}`:""}<div class="up-bar"><i style="width:${Math.min(100,S.pts/100)}%"></i></div></div><div class="tr-grid">${TIERS.map(t=>`<div class="tr ${S.pts>=t[1]?"on":""} ${t[0]===S.tier[0]?"cur":""}"><i class="fa-solid fa-medal"></i><b>${t[0]}</b><small>${t[1].toLocaleString("en-IN")} pts</small></div>`).join("")}</div><p class="muted">You earn 1 point for every ₹1 spent on paid or delivered orders.</p>`;
     else if(pg==="notifs"){
       const N=UO.map(o=>({t:cms(o.created),i:o.status==="delivered"?"circle-check":o.status==="rejected"?"circle-xmark":"clock",x:`Order ${o.id.slice(0,8)} (${money(+o.total||0)}): ${({pending:"waiting for payment verification",paid:"payment confirmed, delivery soon",delivered:"delivered, see My library",rejected:"rejected, contact support"})[o.status]||esc(o.status)}`}));
       MY.forEach(t=>{if(t.lastBy==="admin")N.push({t:tms(t),i:"life-ring",x:`Support replied on "${esc(t.subject)}"`})});
@@ -1324,6 +1475,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   window.openUserPage=pg=>{if(!me||!db)return toast("Log in first");upPage=pg||"dash";$("#up").classList.add("open");document.body.style.overflow="hidden";$("#up").scrollTop=0;upPaint();udLoad()};
   function upClose(){park();leaveThread("user");$("#up").classList.remove("open");document.body.style.overflow=""}
   addEventListener("niuroo-auth",e=>{if(!e.detail){UO=null;upClose()}});
+  document.addEventListener("click",e=>{if(!$("#up").classList.contains("open"))return;const a=e.target.closest('a[href^="#"]');if(a&&!a.closest("#up"))upClose()});
   document.addEventListener("click",e=>{
     const c=e.target;let x;
     if(c.closest("[data-up-close]")){upClose();return}
@@ -1332,6 +1484,57 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     if(x=c.closest("[data-ud=copy]")){try{navigator.clipboard.writeText(x.dataset.v);toast("Copied")}catch(y){toast("Copy failed")}}
   });
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#up").classList.contains("open")&&!$("#um").hidden===false)upClose()});
+
+  /* ---------- reviews + popups ---------- */
+  let REV=[],rvR=0,rvCtx={},evDone=false,rvQueue=false;
+  const shortName=()=>{const n=(me.displayName||PROFILE.name||(me.email||"Customer").split("@")[0]).trim().split(/\s+/);return n[0]+(n[1]?" "+n[1][0].toUpperCase()+".":"")};
+  const show=id=>{$("#"+id).hidden=false},hide=id=>{$("#"+id).hidden=true};
+  function revPaint(){
+    $("#revList").innerHTML=REV.map(r=>`<article class="rcard"><div class="stars">${"★".repeat(r.rating|0)}${"☆".repeat(5-(r.rating|0))}</div><p>${esc(r.text)}</p><small><b>${esc(r.name||"Customer")}</b><span>${r.oid?"Verified order":"Customer"}${r.game?" · "+esc(r.game):""}${isAdmin?`<button class="rdel" type="button" data-rdel="${r.id}">Delete</button>`:""}</span></small></article>`).join("");
+  }
+  function loginPrompt(){toast("Log in to write a review");const t=document.createElement("span");t.setAttribute("data-open-auth","");document.body.appendChild(t);t.click();t.remove()}
+  function openReview(ctx){
+    rvCtx=ctx||{};rvR=0;$("#rvTx").value="";$("#rvErr").className="aerr";
+    document.querySelectorAll("#rvStars button").forEach(b=>b.classList.remove("on"));
+    $("#rvT").textContent=rvCtx.oid?"How was your purchase?":"Write a review";
+    $("#rvS").textContent=rvCtx.oid?"You bought "+rvCtx.label+". Your review helps other gamers.":"Share your experience with Niuroo Games.";
+    $("#rvSkip").textContent=rvCtx.oid?"Do it later":"Cancel";show("rv");
+  }
+  function startReviews(){
+    F.onSnapshot(F.query(F.collection(db,"reviews"),F.orderBy("created","desc"),F.limit(12)),s=>{REV=s.docs.map(mk);revPaint()},()=>{});
+  }
+  async function checkReview(){
+    if(rvQueue||!me||!db)return;rvQueue=true;
+    try{
+      const [o,r]=await Promise.all([F.getDocs(F.query(F.collection(db,"orders"),F.where("uid","==",me.uid))),F.getDocs(F.query(F.collection(db,"reviews"),F.where("uid","==",me.uid)))]);
+      const done=new Set(r.docs.map(d=>d.data().oid).filter(Boolean));
+      const c=o.docs.map(mk).filter(x=>(x.status==="paid"||x.status==="delivered")&&!done.has(x.id)&&!sessionStorage.getItem("nu-rv-"+x.id)).sort((a,b)=>cms(b.created)-cms(a.created))[0];
+      if(c)openReview({oid:c.id,label:(c.items||[]).map(i=>i.name).join(", ")||"your order"});
+    }catch(x){}
+  }
+  function onUser(){
+    if(!me)return;
+    if(me.email&&!me.emailVerified&&!evDone){evDone=true;$("#evMail").textContent=me.email;show("ev");return}
+    if(!$("#ev").hidden)return;checkReview();
+  }
+  addEventListener("niuroo-auth",e=>{if(!e.detail){rvQueue=false;evDone=false;hide("ev");hide("rv")}setTimeout(()=>{revPaint();let n=0;const t=setInterval(()=>{if((me&&db&&F)||++n>30){clearInterval(t);onUser()}},400)},200)});
+  {let n=0;const t=setInterval(()=>{if(F&&db){clearInterval(t);startReviews()}else if(++n>60)clearInterval(t)},500)}
+  $("#revOpen").onclick=()=>me?openReview():loginPrompt();
+  $("#evSend").onclick=()=>$("#verSend").click();
+  $("#evRef").onclick=()=>{$("#verRefresh").click();setTimeout(()=>{if(me&&me.emailVerified){hide("ev");checkReview()}},1600)};
+  $("#evSkip").onclick=()=>{hide("ev");checkReview()};
+  $("#rvSkip").onclick=()=>{if(rvCtx.oid)sessionStorage.setItem("nu-rv-"+rvCtx.oid,"1");hide("rv")};
+  $("#rvStars").addEventListener("click",e=>{const b=e.target.closest("[data-rs]");if(!b)return;rvR=+b.dataset.rs;document.querySelectorAll("#rvStars button").forEach(x=>x.classList.toggle("on",+x.dataset.rs<=rvR))});
+  $("#rvGo").onclick=async()=>{
+    const er=$("#rvErr"),tx=$("#rvTx").value.trim();er.className="aerr";
+    if(!rvR||tx.length<5){er.textContent=!rvR?"Please pick a star rating.":"Write at least a few words.";er.className="aerr on";return}
+    try{
+      const ref=rvCtx.oid?F.doc(db,"reviews",rvCtx.oid):F.doc(F.collection(db,"reviews"));
+      await F.setDoc(ref,{uid:me.uid,name:shortName(),rating:rvR,text:tx,oid:rvCtx.oid||"",game:rvCtx.oid?rvCtx.label.slice(0,80):"",created:F.serverTimestamp()});
+      hide("rv");toast("Thanks for your review!");
+    }catch(x){er.textContent=fire(x);er.className="aerr on"}
+  };
+  document.addEventListener("click",async e=>{const b=e.target.closest("[data-rdel]");if(b&&confirm("Delete this review?")){try{await F.deleteDoc(F.doc(db,"reviews",b.dataset.rdel));toast("Review deleted")}catch(x){toast(fire(x))}}});
 
   $("#checkout").onclick=openCheckout;
   init();
