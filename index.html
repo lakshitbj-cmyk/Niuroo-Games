@@ -627,6 +627,7 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
         <button class="um-i" type="button" role="menuitem" data-um="notifs"><i class="fa-solid fa-bell"></i> Notifications</button>
         <button class="um-i" type="button" role="menuitem" data-um="tickets"><i class="fa-solid fa-life-ring"></i> Support tickets</button>
         <button class="um-i" type="button" role="menuitem" data-um="settings"><i class="fa-solid fa-gear"></i> Account settings</button>
+        <button class="um-i" type="button" role="menuitem" data-um="devices"><i class="fa-solid fa-laptop"></i> Devices</button>
 
         <div class="um-sep"></div>
         <button class="um-i" type="button" role="menuitem" id="umAdmin" data-open-dash hidden><i class="fa-solid fa-user-shield"></i> Admin panel</button>
@@ -1496,7 +1497,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   let UO=null,upPage="dash";
   const cms=t=>t&&t.toMillis?t.toMillis():Date.now();
   const TIERS=[["Bronze",0],["Silver",1000],["Gold",2000],["Diamond",4000],["Platinum",10000]];
-  const TILES=[["orders","box","My orders","Payment and delivery history"],["library","gamepad","My library","Purchased games and keys"],["rewards","gift","Rewards","Points, level and tiers"],["notifs","bell","Notifications","Delivery and support updates"],["tickets","life-ring","Support tickets","Get help with an order"],["settings","gear","Account settings","Profile and security"]];
+  const TILES=[["orders","box","My orders","Payment and delivery history"],["library","gamepad","My library","Purchased games and keys"],["rewards","gift","Rewards","Points, level and tiers"],["notifs","bell","Notifications","Delivery and support updates"],["tickets","life-ring","Support tickets","Get help with an order"],["settings","gear","Account settings","Profile and security"],["devices","laptop","Devices","Where you are logged in"]];
   const oCard=o=>`<div class="oc oc-${esc(o.status)}"><div class="oc-h"><div><b>Order #${esc(o.id.slice(0,8))}</b><small>${when(o.created)}</small></div><span class="pill-st st-o-${esc(o.status)}">${esc(o.status)}</span></div><div class="oc-items">${(o.items||[]).map(i=>`<span><i class="fa-solid fa-gamepad"></i> ${esc(i.q)}× ${esc(i.name)}</span>`).join("")}</div><div class="oc-f"><small>UTR ${esc(o.txn||"-")}</small><b>${money(+o.total||0)}</b></div>${o.delivery?`<div class="od-key"><span><i class="fa-solid fa-key"></i> Your key / delivery details</span><code>${esc(o.delivery)}</code><button class="btn btn-ghost btn-sm" type="button" data-ud="copy" data-v="${esc(o.delivery)}"><i class="fa-regular fa-copy"></i> Copy</button></div>`:""}</div>`;
   const park=()=>{const h=$("#amAcct");["account","tickets","edit"].forEach(k=>h.appendChild($("#acPane-"+k)))};
   function upStats(){
@@ -1510,6 +1511,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
     const pg=upPage,T=TILES.find(t=>t[0]===pg);park();
     const back=pg==="dash"?`<button class="btn btn-ghost btn-sm up-back" type="button" data-up-close><i class="fa-solid fa-chevron-left"></i> Back to Store</button>`:`<button class="btn btn-ghost btn-sm up-back" type="button" data-up="dash"><i class="fa-solid fa-chevron-left"></i> Back to dashboard</button>`;
     const head=T?`<div><span class="eyebrow">Customer dashboard</span><h2>${T[2]}</h2><p class="muted">${T[3]}</p></div>`:"";
+    if(pg==="devices"){B.innerHTML=back+head+`<div id="devBox"><p class="muted">Loading devices…</p></div>`;devLoad();return}
     if(pg==="tickets"||pg==="settings"){
       B.innerHTML=back+head+`<div class="up-box" id="upHost"></div>`;
       if(pg==="tickets"){setAcTab("tickets");$("#upHost").appendChild($("#acPane-tickets"))}
@@ -1587,10 +1589,11 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   function onUser(){
     if(!me)return;
     if(nfUid!==me.uid){nfUid=me.uid;startNotifs()}
+    if(sesUid!==me.uid){sesUid=me.uid;startSession()}
     if(me.email&&!me.emailVerified&&!evDone){evDone=true;$("#evMail").textContent=me.email;show("ev");return}
     if(!$("#ev").hidden)return;checkReview();
   }
-  addEventListener("niuroo-auth",e=>{if(!e.detail){rvQueue=false;evDone=false;nfUid=null;stopNotifs();hide("ev");hide("rv")}setTimeout(()=>{revPaint();applyImg();bellPaint();let n=0;const t=setInterval(()=>{if((me&&db&&F)||++n>30){clearInterval(t);onUser()}},400)},200)});
+  addEventListener("niuroo-auth",e=>{if(!e.detail){rvQueue=false;evDone=false;nfUid=null;stopNotifs();sesUid=null;stopSession();hide("ev");hide("rv")}setTimeout(()=>{revPaint();applyImg();bellPaint();let n=0;const t=setInterval(()=>{if((me&&db&&F)||++n>30){clearInterval(t);onUser()}},400)},200)});
   {let n=0;const t=setInterval(()=>{if(F&&db){clearInterval(t);startReviews()}else if(++n>60)clearInterval(t)},500)}
   $("#revOpen").onclick=()=>me?openReview():loginPrompt();
   $("#evSend").onclick=()=>$("#verSend").click();
@@ -1691,6 +1694,48 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
       if(to==="one"){const em=$("#nf-em").value.trim();if(!em)return bad("Enter the customer's email.");target=await uidByEmail(em);if(!target)return bad("No customer found with that email. They must have logged in and placed an order or ticket.")}
       await sendNotif({to:target,title,body});toast(to==="one"?"Sent to customer":"Sent to everyone");notifyView($("#dmBody"));
     }catch(x){bad(fire(x))}
+  });
+
+  /* ---------- logged-in devices ---------- */
+  let sesUid=null,sesUn=null,sesTimer=null;
+  const devId=()=>{let d="";try{d=localStorage.getItem("nu-dev")||"";if(!d){d=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("nu-dev",d)}}catch(x){d="tmp"+Math.random().toString(36).slice(2)}return d};
+  const devName=()=>{const u=navigator.userAgent,b=/Edg\//.test(u)?"Edge":/OPR\//.test(u)?"Opera":/Firefox\//.test(u)?"Firefox":/Chrome\//.test(u)?"Chrome":/Safari\//.test(u)?"Safari":"Browser",o=/Windows/.test(u)?"Windows":/Android/.test(u)?"Android":/iPhone|iPad/.test(u)?"iOS":/Mac OS/.test(u)?"macOS":/Linux/.test(u)?"Linux":"unknown OS";return b+" on "+o};
+  const ago=t=>{const m=Math.round((Date.now()-cms(t))/6e4);return m<2?"just now":m<60?m+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" days ago"};
+  const sesRef=id=>F.doc(db,"users",me.uid,"sessions",id);
+  function stopSession(){if(sesUn){sesUn();sesUn=null}clearInterval(sesTimer);sesTimer=null}
+  async function startSession(){
+    stopSession();if(!me||!db||!F)return;const uid=me.uid,id=devId(),ref=sesRef(id);
+    try{
+      const d=await F.getDoc(ref);
+      if(d.exists()&&d.data().revoked){toast("You were logged out from another device");$("#logout").click();return}
+      await F.setDoc(ref,{name:devName(),mobile:/Mobi|Android|iPhone/i.test(navigator.userAgent),lastActive:F.serverTimestamp(),...(d.exists()?{}:{created:F.serverTimestamp()})},{merge:true});
+    }catch(x){return}
+    if(!me||me.uid!==uid)return;
+    sesUn=F.onSnapshot(ref,sn=>{if(sn.exists()&&sn.data().revoked){toast("You were logged out from another device");$("#logout").click()}},()=>{});
+    sesTimer=setInterval(()=>{F.setDoc(ref,{lastActive:F.serverTimestamp()},{merge:true}).catch(()=>{})},3e5);
+  }
+  /* manual logout: remove this device from the list first, then sign out */
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("#logout");if(!b||b.dataset.done||!me||!db||!F)return;
+    e.stopImmediatePropagation();e.preventDefault();const uid=me.uid;stopSession();
+    Promise.race([F.deleteDoc(F.doc(db,"users",uid,"sessions",devId())),new Promise(r=>setTimeout(r,2000))]).catch(()=>{}).finally(()=>{b.dataset.done="1";b.click();delete b.dataset.done});
+  },true);
+  async function devLoad(){
+    const box=$("#devBox");if(!box)return;
+    try{
+      const q=await F.getDocs(F.collection(db,"users",me.uid,"sessions")),cur=devId(),L=q.docs.map(mk).sort((a,b)=>cms(b.lastActive)-cms(a.lastActive));
+      const others=L.filter(x=>x.id!==cur&&!x.revoked);
+      box.innerHTML=`<p class="muted" style="margin-bottom:.8rem">These are the devices where your account is open. Logging out a device signs it out as soon as it opens the site.</p>`+(others.length?`<div class="dm-bar"><button class="btn btn-ghost btn-sm" type="button" data-devout="all"><i class="fa-solid fa-right-from-bracket"></i> Log out all other devices</button></div>`:"")
+      +(L.map(x=>`<div class="dm-row"><span class="tk-ic"><i class="fa-solid fa-${x.mobile?"mobile-screen":"laptop"}"></i></span><div class="t"><b>${esc(x.name||"Unknown device")} ${x.id===cur?`<span class="pill-st st-o-delivered">This device</span>`:""}</b><small>${x.revoked?"Will be logged out when it next opens the site":"Last active "+ago(x.lastActive)}${x.created?" · First seen "+when(x.created):""}</small></div>${x.id!==cur&&!x.revoked?`<button class="btn btn-ghost btn-sm" type="button" data-devout="${esc(x.id)}">Log out</button>`:""}</div>`).join("")||`<p class="muted">No devices recorded yet.</p>`);
+    }catch(x){box.innerHTML=`<div class="aerr on">${esc(fire(x))}</div>`}
+  }
+  document.addEventListener("click",async e=>{
+    const b=e.target.closest("[data-devout]");if(!b||!me)return;
+    const all=b.dataset.devout==="all";if(!confirm(all?"Log out all other devices?":"Log out this device?"))return;
+    try{
+      const cur=devId(),ids=all?(await F.getDocs(F.collection(db,"users",me.uid,"sessions"))).docs.map(d=>d.id).filter(i=>i!==cur):[b.dataset.devout];
+      await Promise.all(ids.map(i=>F.setDoc(sesRef(i),{revoked:true},{merge:true})));toast(all?"Other devices will be logged out":"Device will be logged out");devLoad();
+    }catch(x){toast(fire(x))}
   });
 
   $("#checkout").onclick=openCheckout;
