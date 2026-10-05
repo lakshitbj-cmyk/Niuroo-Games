@@ -600,6 +600,8 @@ body.u-in #authBtn[aria-expanded="true"]::after{transform:rotate(180deg)}
 .nf-card>b{display:flex;align-items:center;gap:.6rem;font-size:1.2rem}.nf-card>b i{color:rgb(var(--accent))}
 .nf-new{border-color:rgba(var(--accent),.55)!important;background:rgba(var(--accent),.1)!important}
 .nf-on{border-color:rgba(var(--pos),.35);background:rgba(var(--pos),.07)}
+.gdesc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pdesc{white-space:pre-line;line-height:1.65;font-size:.98rem}
 </style>
 </head>
 <body>
@@ -824,13 +826,15 @@ function renderChips(){
   const gs=["All",...new Set(GAMES.map(g=>g.genre))];
   $("#chips").innerHTML=gs.map(g=>`<button class="chip ${g===genre?"on":""}" data-g="${g}">${g}</button>`).join("");
 }
+const escD=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const teaser=d=>{const t=String(d||"").split(/\n/)[0].replace(/\s+/g," ").trim();return escD(t.length>90?t.slice(0,90).trimEnd()+"…":t)};
 function renderGames(){
   const list=GAMES.filter(g=>(genre==="All"||g.genre===genre)&&g.name.toLowerCase().includes(query));
   $("#games-grid").innerHTML=list.length?list.map(g=>`
   <article class="gcard">
     <a class="cover" href="#/product/${g.id}" style="background:${grad(g)}" aria-label="Open ${g.name}">${g.img?"":`<i class="fa-solid ${g.icon} glyph"></i>`}
       ${g.old?`<span class="disc">-${Math.round((1-g.price/g.old)*100)}%</span>`:""}<span class="tag">${g.genre}</span></a>
-    <div class="gbody"><h3><a href="#/product/${g.id}">${g.name}</a></h3><p class="muted">${g.d}</p>
+    <div class="gbody"><h3><a href="#/product/${g.id}">${g.name}</a></h3><p class="muted gdesc">${teaser(g.d)}</p>
       <div class="gfoot"><span class="price">${money(g.price)}${g.old?`<s>${money(g.old)}</s>`:""}</span>
       <a class="btn btn-primary btn-sm" href="#/product/${g.id}"><i class="fa-solid fa-bolt"></i> Buy</a></div></div>
   </article>`).join(""):`<div class="empty muted"><i class="fa-solid fa-ghost" style="font-size:2rem;margin-bottom:.8rem"></i><p>No games match "${query}". Try another name or clear the genre filter.</p></div>`;
@@ -923,7 +927,7 @@ function showProduct(g){
     </div>
     <div class="p-desc">
       <h2>${g.name} | ${g.genre}</h2>
-      <p class="muted">${g.d}</p>
+      <p class="muted pdesc">${escD(g.d)}</p>
       <ul><li><i class="fa-solid fa-check"></i> Key delivered on screen and by email</li><li><i class="fa-solid fa-check"></i> Works with your own account</li><li><i class="fa-solid fa-check"></i> Replacement if the key fails</li></ul>
       <div class="p-price-line">Price: ${money(g.price)} each</div>
     </div>
@@ -946,11 +950,16 @@ function showProduct(g){
   clearInterval(pTimer);let t=900;
   pTimer=setInterval(()=>{t=t>0?t-1:900;const r=$("#rt");if(r)r.textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")},1000);
 }
+function themePP(g){
+  const rgb=h=>{h=String(h||"").replace("#","");return /^[0-9a-f]{6}$/i.test(h)?[0,2,4].map(i=>parseInt(h.substr(i,2),16)).join(","):""},a=rgb(g.c&&g.c[1]),b=rgb(g.c&&g.c[0]),pp=$("#pp");
+  if(!a||!b){pp.removeAttribute("style");return}
+  pp.setAttribute("style",`--accent:${a};--accent2:${b};--grad-accent:linear-gradient(105deg,rgb(${a}),rgb(${b}));background:radial-gradient(60rem 26rem at 50% 0,rgba(${a},.18),transparent 70%)`);
+}
 function route(){
   const m=location.hash.match(/^#\/product\/(\d+)/),g=m&&GAMES.find(x=>x.id===+m[1]);
   closeSearch();$("#drawer").classList.remove("open");
-  if(g){$("#top").hidden=true;$("#pp").hidden=false;showProduct(g);document.title=g.name+" — Niuroo Games";scrollTo(0,0)}
-  else{clearInterval(pTimer);$("#pp").hidden=true;$("#top").hidden=false;document.title="Niuroo Games — Game keys, delivered instantly";
+  if(g){$("#top").hidden=true;$("#pp").hidden=false;showProduct(g);themePP(g);document.title=g.name+" — Niuroo Games";scrollTo(0,0)}
+  else{clearInterval(pTimer);$("#pp").removeAttribute("style");$("#pp").hidden=true;$("#top").hidden=false;document.title="Niuroo Games — Game keys, delivered instantly";
     const el=location.hash.length>1&&document.getElementById(location.hash.slice(1));setTimeout(()=>el?el.scrollIntoView():scrollTo(0,0),0)}
 }
 addEventListener("hashchange",route);
@@ -1195,7 +1204,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
       <label>Name<input id="f-name" value="${esc(g.name)}"></label>
       <div class="two"><label>Genre<input id="f-genre" value="${esc(g.genre)}" placeholder="RPG"></label><label>Stock<input id="f-stock" type="number" min="0" value="${g.stock??0}"></label></div>
       <div class="two"><label>Price (₹)<input id="f-price" type="number" min="0" value="${g.price}"></label><label>Old price (₹, optional)<input id="f-old" type="number" min="0" value="${g.old||""}"></label></div>
-      <label>Description<input id="f-d" value="${esc(g.d)}"></label>
+      <label>Description (shown after Buy. Press Enter for a new line)<textarea id="f-d" rows="9" style="min-height:200px;resize:vertical;line-height:1.55">${esc(g.d)}</textarea></label>
       <label>Image link (https) <input id="f-img" value="${pImg?"":esc(g.img||"")}" placeholder="https://..."></label>
       <label>or upload image<input id="f-file" type="file" accept="image/*"></label>
       <div class="two"><label>Colour 1<input id="f-c0" type="color" value="${g.c[0]}"></label><label>Colour 2<input id="f-c1" type="color" value="${g.c[1]}"></label></div>
@@ -1329,7 +1338,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
   document.addEventListener("submit",e=>{if(e.target.id==="gf")saveGame(e);if(e.target.id==="cf")saveCheckout(e);if(e.target.id==="adf")saveAd(e);if(e.target.id==="sf")saveSpeed(e)});
   document.addEventListener("change",async e=>{
     const f=e.target;if(f.id!=="f-file"&&f.id!=="q-file")return;const file=f.files[0];if(!file)return;
-    try{const u=await toData(file,f.id==="f-file"?800:520);f.id==="f-file"?pImg=u:pQR=u;toast("Image ready. Press Save.")}catch(x){toast("Image too big or unreadable. Try a smaller one.")}
+    try{const u=await toData(file,f.id==="f-file"?800:520);f.id==="f-file"?pImg=u:pQR=u;let msg="Image ready. Press Save.";if(f.id==="f-file"){const pl=await palette(u);if(pl&&$("#f-c0")&&$("#f-c1")){$("#f-c0").value=pl.c0;$("#f-c1").value=pl.c1;msg="Poster added. Game colours matched. Press Save."}}toast(msg)}catch(x){toast("Image too big or unreadable. Try a smaller one.")}
   });
 
   /* ad image: pick theme colours from the picture */
@@ -1783,6 +1792,12 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
 new MutationObserver(()=>{const on=am.classList.contains("open");
   if(on&&!was&&!au.hidden){am.classList.remove("fx");void am.offsetWidth;am.classList.add("fx");setTimeout(()=>am.classList.remove("fx"),3500)}
   was=on}).observe(am,{attributes:true,attributeFilter:["class"]})})();
+</script><script>
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Backspace")return;const t=e.target,tag=t&&t.tagName;
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test(tag)||(t&&t.isContentEditable))return;
+  if(document.querySelector("#dm.open,#am.open,#up.open,#sm.open"))e.preventDefault();
+},true);
 </script></body>
 
 </html>
