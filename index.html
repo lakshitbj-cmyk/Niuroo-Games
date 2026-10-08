@@ -861,7 +861,7 @@ function openSub(id){
 }
 document.addEventListener("click",e=>{
   let x;const c=e.target;
-  if(x=c.closest("[data-sbuy]")){openSub(+x.dataset.sbuy);return}
+  if(x=c.closest("[data-sbuy]")){location.hash="#/sub/"+x.dataset.sbuy;return}
   if(x=c.closest("[data-sbm]")){sbSel=+x.dataset.sbm;document.querySelectorAll("#sbP .sb-plan").forEach(b=>b.classList.toggle("on",b===x));return}
   if(c.closest("#sbX")||c.id==="sb")$("#sb").hidden=true;
   if(c.closest("#sbBuy")){addToCart(sbSel,1);$("#sb").hidden=true;$("#cart").classList.add("open")}
@@ -989,15 +989,61 @@ function showProduct(g){
   clearInterval(pTimer);let t=900;
   pTimer=setInterval(()=>{t=t>0?t-1:900;const r=$("#rt");if(r)r.textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")},1000);
 }
+function showSub(q){
+  const ks=Object.keys(q.plans||{}).map(Number).sort((a,b)=>a-b),p1=+q.plans[1],mo=ks.some(k=>k>0),cc={img:q.img,c:q.c||["#3b1d6e","#c9822b"]};
+  let sel=q.id*10+ks[0];const price=()=>subPlan(sel).price;
+  const plans=ks.map((m,i)=>{const pr=+q.plans[m],sv=m>1&&p1>0?Math.round((1-pr/(p1*m))*100):0;return `<button type="button" class="sb-plan ${i?"":"on"}" data-m="${q.id*10+m}"><span><b>${m?m+" month"+(m>1?"s":""):"One-time"}</b>${sv>0?`<em>Save ${sv}%</em>`:""}</span><strong>${money(pr)}</strong></button>`}).join("");
+  $("#pp").innerHTML=`
+  <a class="back" href="#subs"><i class="fa-solid fa-arrow-left"></i> Back to subscriptions</a>
+  <div class="pp-grid">
+   <div class="pcard">
+    <div class="p-head"><h1>${escD(q.name)}</h1><span class="status"><i></i>On</span></div>
+    <div class="pbanner" style="background:${grad(cc)}">
+      ${q.img?"":`<i class="fa-solid ${escD(q.icon||"fa-rotate")} glyph"></i>`}
+      <span class="pb-chip"><i class="fa-solid fa-crown"></i> Subscription</span>
+      <div><div class="pb-title">${escD(q.name)}</div><div class="pb-sub" style="margin-top:.8rem">${mo?"Choose a 1, 2 or 3 month plan":"One-time plan"} · Fast delivery</div></div>
+      <div class="pb-feats">
+        <div><b><i class="fa-solid fa-shield-halved"></i> Full access</b>Account details given to you</div>
+        <div><b><i class="fa-solid fa-lock"></i> Secure &amp; trusted</b>100% safe and reliable</div>
+        <div><b><i class="fa-solid fa-bolt"></i> Fast delivery</b>Sent after payment check</div>
+        <div><b><i class="fa-solid fa-calendar-check"></i> Flexible plans</b>Pick the length you want</div>
+      </div>
+      <div class="pb-foot"><span><i class="fa-solid fa-circle-check"></i> Trusted seller</span><span><i class="fa-solid fa-clock"></i> Quick delivery</span><span><i class="fa-solid fa-headset"></i> 24/7 support</span></div>
+    </div>
+    <div class="p-desc">
+      <h2>${escD(q.name)} | Subscription</h2>
+      <p class="muted pdesc">${escD(q.d)}</p>
+      <ul><li><i class="fa-solid fa-check"></i> Details delivered in My orders</li><li><i class="fa-solid fa-check"></i> Pick the plan length that suits you</li><li><i class="fa-solid fa-check"></i> Help available if anything goes wrong</li></ul>
+      <div class="p-price-line">Price: from ${money(Math.min(...ks.map(k=>+q.plans[k])))}</div>
+    </div>
+   </div>
+   <aside class="pcard buybox">
+    <div class="bb-top"><div class="bb-price" id="sp">${money(price())}</div><div class="bb-stock">Available</div></div>
+    <div class="bb-body">
+      <div class="reserve"><span><i class="fa-regular fa-clock"></i> Your checkout session is reserved for</span><b id="rt">15:00</b></div>
+      <div><span class="lbl">${mo?"Choose your plan":"Plan"}</span><div class="sb-plans" id="spP">${plans}</div></div>
+      <div class="bb-total"><span class="muted">Total</span><span id="pt">${money(price())}</span></div>
+      <div class="bb-actions"><button class="btn btn-primary" id="atc">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button><button class="btn btn-ghost" id="bn">Buy Now <i class="fa-solid fa-bolt"></i></button></div>
+    </div>
+   </aside>
+  </div>`;
+  $("#spP").onclick=e=>{const b=e.target.closest("[data-m]");if(!b)return;sel=+b.dataset.m;document.querySelectorAll("#spP .sb-plan").forEach(x=>x.classList.toggle("on",x===b));$("#sp").textContent=$("#pt").textContent=money(price())};
+  $("#atc").onclick=()=>{addToCart(sel,1);toast(subPlan(sel).name+" added to cart")};
+  $("#bn").onclick=()=>{addToCart(sel,1);$("#cart").classList.add("open")};
+  clearInterval(pTimer);let t=900;
+  pTimer=setInterval(()=>{t=t>0?t-1:900;const r=$("#rt");if(r)r.textContent=String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")},1000);
+}
 function themePP(g){
   const rgb=h=>{h=String(h||"").replace("#","");return /^[0-9a-f]{6}$/i.test(h)?[0,2,4].map(i=>parseInt(h.substr(i,2),16)).join(","):""},a=rgb(g.c&&g.c[1]),b=rgb(g.c&&g.c[0]),pp=$("#pp");
   if(!a||!b){pp.removeAttribute("style");return}
   pp.setAttribute("style",`--accent:${a};--accent2:${b};--grad-accent:linear-gradient(105deg,rgb(${a}),rgb(${b}));background:radial-gradient(60rem 26rem at 50% 0,rgba(${a},.18),transparent 70%)`);
 }
 function route(){
-  const m=location.hash.match(/^#\/product\/(\d+)/),g=m&&GAMES.find(x=>x.id===+m[1]);
+  const m=location.hash.match(/^#\/product\/(\d+)/),g=m&&GAMES.find(x=>x.id===+m[1]),ms=location.hash.match(/^#\/sub\/(\d+)/),q=ms&&SUBS.find(x=>x.id===+ms[1]);
   closeSearch();$("#drawer").classList.remove("open");
   if(g){$("#top").hidden=true;$("#pp").hidden=false;showProduct(g);themePP(g);document.title=g.name+" — Niuroo Games";scrollTo(0,0)}
+  else if(q){$("#top").hidden=true;$("#pp").hidden=false;showSub(q);themePP(q);document.title=q.name+" — Niuroo Games";scrollTo(0,0)}
+  else if(ms&&!SUBS.length){$("#top").hidden=true;$("#pp").hidden=false;$("#pp").innerHTML=`<a class="back" href="#subs"><i class="fa-solid fa-arrow-left"></i> Back</a><p class="muted" style="padding:2rem 0">Loading…</p>`}
   else{clearInterval(pTimer);$("#pp").removeAttribute("style");$("#pp").hidden=true;$("#top").hidden=false;document.title="Niuroo Games — Game keys, delivered instantly";
     const el=location.hash.length>1&&document.getElementById(location.hash.slice(1));setTimeout(()=>el?el.scrollIntoView():scrollTo(0,0),0)}
 }
@@ -1789,7 +1835,7 @@ const ADMIN_EMAILS=["ruperjaat@gmail.com"];
 
   /* ---------- subscriptions (admin + data) ---------- */
   let sbEdit=null,sbImg="";
-  function startSubs(){F.onSnapshot(F.collection(db,"subs"),sn=>{SUBS=sn.docs.map(d=>d.data()).sort((a,b)=>(a.order??0)-(b.order??0));renderSubs();renderCart();if($("#dm").classList.contains("open")&&tab==="subs"&&sbEdit===null)renderDash()},()=>{})}
+  function startSubs(){F.onSnapshot(F.collection(db,"subs"),sn=>{SUBS=sn.docs.map(d=>d.data()).sort((a,b)=>(a.order??0)-(b.order??0));renderSubs();renderCart();if(/^#\/sub\//.test(location.hash))route();if($("#dm").classList.contains("open")&&tab==="subs"&&sbEdit===null)renderDash()},()=>{})}
   const sbCols=q=>q&&q.c||["#3b1d6e","#c9822b"];
   function subsAdmin(B){
     if(sbEdit!==null)return subForm(B);
